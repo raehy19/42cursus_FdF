@@ -31,7 +31,7 @@ func _mlx_bridge_transfer<T : AnyObject>(ptr : UnsafeRawPointer) -> T {
 @_cdecl("mlx_init")
 public func mlx_init_swift() -> UnsafeRawPointer
 {
-	let mm = MlxMain()	
+	let mm = MlxMain()
 /**
 	withUnsafePointer(to: &mm) {
 	    print(" mlx init ptr: \($0)")
@@ -245,7 +245,7 @@ public func mlx_mouse_move_swift(_ winptr:UnsafeRawPointer, _ x:Int32, _ y:Int32
 ///	pt.y = sframe.size.y - frame.size.y - frame.origin.y + 1 + y
 	pt.y = frame.origin.y + frame.size.height - 1.0 - CGFloat(y)
 	CGWarpMouseCursorPosition(pt)
-	CGAssociateMouseAndMouseCursorPosition(UInt32(1))
+	CGAssociateMouseAndMouseCursorPosition(1)
 	return Int32(0);
 }
 
