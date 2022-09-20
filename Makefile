@@ -12,9 +12,11 @@
 
 NAME := fdf
 BONUS_NAME := fdf_bonus
+MLX_LIB_NAME := libmlx.dylib
+MLX_LIB_DIR := mlx
+
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -Imlx
-LIB_INCLUDE_FLAG := -L ./minilibx_mms_20191025_beta
 RM := rm -f
 
 FDF_SRCS := \
@@ -29,6 +31,8 @@ FDF_OBJS_BONUS := $(FDF_SRCS_BONUS:.c=.o)
 all : $(NAME)
 
 clean :
+	make -C $(MLX_LIB_DIR) clean
+	$(RM) $(MLX_LIB_NAME)
 	$(RM) $(FDF_OBJS)
 	$(RM) $(FDF_OBJS_BONUS)
 
@@ -41,10 +45,14 @@ re : fclean
 
 bonus : $(BONUS_NAME)
 
-$(NAME) : $(FDF_OBJS)
+$(NAME) : $(MLX_LIB_NAME) $(FDF_OBJS)
 	$(CC) $^ -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
 
 $(BONUS_NAME) : $(FDF_OBJS_BONUS)
+
+$(MLX_LIB_NAME) :
+	make -C $(MLX_LIB_DIR) all
+	cp ./mlx/$(MLX_LIB_NAME) ./$(MLX_LIB_NAME)
 
 run : $(NAME)
 	./$(NAME)
