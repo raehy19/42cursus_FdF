@@ -11,16 +11,36 @@
 /* ************************************************************************** */
 
 #include <mlx.h>
+#include <stdlib.h>
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+}	t_mlx;
+
+#define KEY_PRESS 2
+#define BTN_PRESS 4
+
+#define KEYCODE_ESC 53
+#define KEYCODE_C 8
+
+int ft_key_press_handler(int keycode, void *param)
+{
+	if (keycode == KEYCODE_ESC)
+		exit(0);
+	else if (keycode == KEYCODE_C)
+		mlx_clear_window(((t_mlx *)param)->mlx, ((t_mlx *)param)->win);
+	return (0);
+};
 
 int	main(void)
 {
-	void    *mlx;
-	void    *mlx_win;
+	t_mlx	mlx;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");// 창을 생성한고 창의 식별자를 반환 받는다.
-	mlx_loop(mlx);// 새로 생성한 window가 있는 mlx를 rendering
-	if (!mlx_win)
-		return (0);
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, 1920, 1080, "FdF");
+	mlx_hook(mlx.win, KEY_PRESS, 0, &ft_key_press_handler, &mlx);
+	mlx_loop(mlx.mlx);
 	return (0);
 }
