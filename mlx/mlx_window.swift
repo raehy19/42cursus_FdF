@@ -38,9 +38,9 @@ class WinEvent: NSWindow
       NotificationCenter.default.addObserver(self, selector: #selector(closeNotification(_:)), name: NSWindow.willCloseNotification, object: nil)
 
 /***
-      [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(exposeNotification:) name:@"NSWindowDidBecomeKeyNotification" object:win];
-      [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(deminiaturizeNotification:) name:@"NSWindowDidDeminiaturizeNotification" object:win];
-      [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(closeNotification:) name:@"NSWindowWillCloseNotification" object:win];
+      [[NSNotificationCenter defaultCenter] addObserver:win_ptr selector:@selector(exposeNotification:) name:@"NSWindowDidBecomeKeyNotification" object:win_ptr];
+      [[NSNotificationCenter defaultCenter] addObserver:win_ptr selector:@selector(deminiaturizeNotification:) name:@"NSWindowDidDeminiaturizeNotification" object:win_ptr];
+      [[NSNotificationCenter defaultCenter] addObserver:win_ptr selector:@selector(closeNotification:) name:@"NSWindowWillCloseNotification" object:win_ptr];
 ***/
 
   }
@@ -156,7 +156,7 @@ class WinEvent: NSWindow
         {
           _ = unsafeBitCast(eventFuncts[4],to:(@convention(c)(Int32, Int32, Int32, UnsafeRawPointer)->Int32).self)(Int32(button), Int32(thepoint.x), Int32(thepoint.y), eventParams[4])
         }
-  } 
+  }
 
 
   override func flagsChanged(with event: NSEvent)
@@ -372,7 +372,7 @@ class MTKVDelegate: NSObject, MTKViewDelegate
        -1.0, 1.0, 0.0, 1.0,   0.0, 0.0, 0.0, 0.0,
        1.0, 1.0, 0.0, 1.0,    1.0, 0.0, 0.0, 0.0  ]
     var dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
-    vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: []) 
+    vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
 
     let vrect = view.frame
 
@@ -387,7 +387,7 @@ class MTKVDelegate: NSObject, MTKViewDelegate
     		     	       1.0, 1.0, 1.0, 1.0 ]
     dataSize = uniformData.count * MemoryLayout.size(ofValue: uniformData[0])
     for _ in 0...255
-    { 
+    {
       let uniformBuffer = device.makeBuffer(bytes: uniformData, length: dataSize, options: [])!
       let uniform_data = (uniformBuffer.contents()).assumingMemoryBound(to:Float.self)
       texture_list.append(textureList(uniformBuffer:uniformBuffer, uniform_data:uniform_data, texture:pixel_image.texture)) }
@@ -416,7 +416,7 @@ class MTKVDelegate: NSObject, MTKViewDelegate
   {
 	if (pixel_count > 0)
 	{
-	  
+
 	  self.putImage(pixel_image, 0, 0)
 	  self.flushImages()
 	  for i in 0...pixel_image.texture_height*pixel_image.texture_sizeline/4-1
@@ -435,7 +435,7 @@ class MTKVDelegate: NSObject, MTKViewDelegate
 
   func putImage(_ img:MlxImg, _ x:Int32, _ y:Int32)
   {
-	putImageScale(img, 0, 0, Int32(img.texture_width), Int32(img.texture_height), 
+	putImageScale(img, 0, 0, Int32(img.texture_width), Int32(img.texture_height),
 			   x, y, Int32(img.texture_width), Int32(img.texture_height),
 			   UInt32(0xFFFFFFFF))
   }
@@ -522,7 +522,7 @@ class MTKVDelegate: NSObject, MTKViewDelegate
 		   i += 1
   		  }
 		  texture_list_count = 0
-                }	
+                }
          }
 	commandBuffer.addCompletedHandler { cb in self.GPUbatch -= 1 }
 	commandBuffer.present(view.currentDrawable!)

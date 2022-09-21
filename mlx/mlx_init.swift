@@ -32,7 +32,7 @@ public class MlxMain {
         myMlxApp = NSApplication.shared
 	if (flag == 1)
 	{
-		NSApp.setActivationPolicy(NSApplication.ActivationPolicy.prohibited)   /// for non clickable win, no top menu
+		NSApp.setActivationPolicy(NSApplication.ActivationPolicy.prohibited)   /// for non clickable win_ptr, no top menu
 	}
 	else
 	{
@@ -49,8 +49,8 @@ public class MlxMain {
 
       }
 
-      public func addWinToList(_ win:MlxWin)
-      { winList.append(win) }
+      public func addWinToList(_ win_ptr:MlxWin)
+      { winList.append(win_ptr) }
       public func addImgToList(_ img:MlxImg)
       { imgList.append(img) }
 
@@ -66,18 +66,18 @@ public class MlxMain {
     func createOCallback() -> CFRunLoopObserverCallBack
     {
         return { (cfRunloopObserver, cfrunloopactivity, info) -> Void in
-	    let mlx:MlxMain = _mlx_bridge(ptr:info!)
-	    mlx.winList.forEach { $0.flushPixels() }
-	    mlx.winList.forEach { $0.flushImages() }
-///         mlx.doCallLoopHook()
+	    let mlx_ptr:MlxMain = _mlx_bridge(ptr:info!)
+	    mlx_ptr.winList.forEach { $0.flushPixels() }
+	    mlx_ptr.winList.forEach { $0.flushImages() }
+///         mlx_ptr.doCallLoopHook()
         }
     }
 
     func createTCallback() -> CFRunLoopTimerCallBack
     {
         return { (cfRunloopTimer, info) -> Void in
-	    let mlx:MlxMain = _mlx_bridge(ptr:info!)
-            mlx.doCallLoopHook()
+	    let mlx_ptr:MlxMain = _mlx_bridge(ptr:info!)
+            mlx_ptr.doCallLoopHook()
         }
     }
 
