@@ -21,6 +21,7 @@ RM := rm -f
 
 FDF_SRCS := \
 	fdf.c \
+	get_next_line.c\
 
 FDF_SRCS_BONUS := \
 
