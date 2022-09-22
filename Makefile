@@ -25,6 +25,7 @@ RM := rm -f
 
 FDF_SRCS := \
 	fdf.c \
+	fdf_parse.c
 
 FDF_SRCS_BONUS := \
 
