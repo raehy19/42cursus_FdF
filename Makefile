@@ -12,6 +12,10 @@
 
 NAME := fdf
 BONUS_NAME := fdf_bonus
+
+LIBFT := ./libft/libft.a
+LIBFT_DIR := libft
+
 MLX_LIB_NAME := libmlx.dylib
 MLX_LIB_DIR := mlx
 
@@ -21,7 +25,6 @@ RM := rm -f
 
 FDF_SRCS := \
 	fdf.c \
-	get_next_line.c\
 
 FDF_SRCS_BONUS := \
 
@@ -33,11 +36,13 @@ all : $(NAME)
 
 clean :
 	make -C $(MLX_LIB_DIR) clean
+	make -C $(LIBFT_DIR) clean
 	$(RM) $(MLX_LIB_NAME)
 	$(RM) $(FDF_OBJS)
 	$(RM) $(FDF_OBJS_BONUS)
 
 fclean : clean
+	$(RM) $(LIBFT)
 	$(RM) $(BONUS_NAME)
 	$(RM) $(NAME)
 
@@ -46,8 +51,11 @@ re : fclean
 
 bonus : $(BONUS_NAME)
 
-$(NAME) : $(MLX_LIB_NAME) $(FDF_OBJS)
-	$(CC) $^ -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
+$(LIBFT) :
+	make -C $(LIBFT_DIR) all
+
+$(NAME) : $(LIBFT) $(MLX_LIB_NAME) $(FDF_OBJS)
+	$(CC) $^ -L$(LIBFT_DIR) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
 
 $(BONUS_NAME) : $(FDF_OBJS_BONUS)
 

@@ -10,8 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdlib.h>
+#ifndef FDF_H
+# define FDF_H
+
+# include <mlx.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+# include "printf.h"
+# include "./libft/libft.h"
+
+# define KEY_PRESS 2
+# define BTN_PRESS 4
+
+# define KEYCODE_ESC 53
+# define KEYCODE_C 8
 
 typedef struct s_mlx
 {
@@ -42,11 +57,11 @@ typedef struct s_argb
 	char	b;
 }	t_argb;
 
+typedef struct s_map
+{
+	int	width;
+	int	height;
+	int	**map;
+}	t_map;
 
-#define KEY_PRESS 2
-#define BTN_PRESS 4
-
-#define KEYCODE_ESC 53
-#define KEYCODE_C 8
-
-char	*get_next_line(int fd);
+#endif
