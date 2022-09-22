@@ -53,26 +53,26 @@ int	main(int argc, char **argv)
 
 	printf("width height : %d %d\n",map.width, map.height);
 
-	printf("print map : \n");
-	for (int i = 0; i < map.height; ++i)
-	{
-		for (int j = 0; j < map.width; ++j)
-		{
-			printf("%d\t", map.map[i][j]);
-		}
-		printf("\n");
-	}
-
-
 	mlx.mlx_ptr = mlx_init();
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1920, 1080, "FdF");
 	img.img_ptr = mlx_new_image(mlx.mlx_ptr, 1920, 1080);
 	img.img_addr = mlx_get_data_addr(img.img_ptr, &img.bits_per_pixel, &img.size_line, &img.endian);
 
-	ft_draw_dot(img, (t_xy){100, 100}, (t_argb){0, 255, 255, 255});
-	ft_draw_dot(img, (t_xy){150, 150}, (t_argb){0, 255, 0, 0});
-	ft_draw_dot(img, (t_xy){100, 150}, (t_argb){0, 255, 255, 255});
-	ft_draw_dot(img, (t_xy){150, 100}, (t_argb){0, 0, 0, 255});
+
+	printf("print map : \n");
+	for (int i = 0; i < map.height; ++i)
+	{
+		for (int j = 0; j < map.width; ++j)
+		{
+			ft_draw_dot(img, (t_xy){j * 20, i * 20}, (t_argb){0, 255, 255, 255});
+			printf("%d\t", map.map[i][j]);
+		}
+		printf("\n");
+	}
+//	ft_draw_dot(img, (t_xy){100, 100}, (t_argb){0, 255, 255, 255});
+//	ft_draw_dot(img, (t_xy){150, 150}, (t_argb){0, 255, 0, 0});
+//	ft_draw_dot(img, (t_xy){100, 150}, (t_argb){0, 255, 255, 255});
+//	ft_draw_dot(img, (t_xy){150, 100}, (t_argb){0, 0, 0, 255});
 
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, img.img_ptr, 0, 0);
 
