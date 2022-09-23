@@ -64,6 +64,6 @@ typedef struct s_map
 	int	**map;
 }	t_map;
 
-int	ft_parse(t_map *map, char *filename);
+void	ft_parse(t_map *map, char *filename);
 
 #endif

@@ -48,8 +48,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (1);
-	if (ft_parse(&map, *(argv + 1)) < 0)
-		return (2);
+	ft_parse(&map, *(argv + 1));
 
 	printf("width height : %d %d\n",map.width, map.height);
 
@@ -64,7 +63,7 @@ int	main(int argc, char **argv)
 	{
 		for (int j = 0; j < map.width; ++j)
 		{
-			ft_draw_dot(img, (t_xy){j * 20, i * 20}, (t_argb){0, 255, 255, 255});
+			ft_draw_dot(img, (t_xy){20 + j * 10, 20 + i * 10}, (t_argb){0, 255, 255, 255});
 			printf("%d\t", map.map[i][j]);
 		}
 		printf("\n");

@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int	ft_free_line_and_words(char *line, char **words, int flag)
+void	ft_free_line_and_words(char *line, char **words)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ int	ft_free_line_and_words(char *line, char **words, int flag)
 			free(*(words + i));
 		free(words);
 	}
-	return (flag);
+	return ;
 }
 
 int	ft_count_word_in_line(char *line)
@@ -33,16 +33,16 @@ int	ft_count_word_in_line(char *line)
 	char	**words;
 	int		i;
 
-	words = ft_split(line, ' ');
+	words = ft_split(line, " \n");
 	if (!words)
-		return (ft_free_line_and_words(line, words, -1));
+		exit (4);
 	i = -1;
 	while (*(words + (++i)) != NULL)
 		free(*(words + i));
 	return (i);
 }
 
-int	ft_width_height_check(t_map *map, char *filename)
+void	ft_width_height_check(t_map *map, char *filename)
 {
 	int		fd;
 	char	*line;
@@ -50,7 +50,7 @@ int	ft_width_height_check(t_map *map, char *filename)
 
 	fd = open(filename, O_RDWR);
 	if (fd < 0)
-		return (-1);
+		exit (2);
 	line = get_next_line(fd);
 	map->width = ft_count_word_in_line(line);
 	line = get_next_line(fd);
@@ -58,17 +58,18 @@ int	ft_width_height_check(t_map *map, char *filename)
 	while (line)
 	{
 		if (ft_count_word_in_line(line) != map->width)
-			return (ft_free_line_and_words(line, NULL, -1));
+			exit (5);
 		free(line);
 		line = get_next_line(fd);
 		++i;
 	}
 	map->height = i;
 	close(fd);
-	return (0);
+	close(fd);
+	return ;
 }
 
-int	ft_read_line(t_map *map, char *filename)
+void	ft_read_line(t_map *map, char *filename)
 {
 	int		fd;
 	char	*line;
@@ -78,42 +79,36 @@ int	ft_read_line(t_map *map, char *filename)
 
 	fd = open(filename, O_RDWR);
 	if (fd < 0)
-		return (-1);
+		exit (2);
 	i = -1;
 	while (++i < map->height)
 	{
 		line = get_next_line(fd);
-		words = ft_split(line, ' ');
+		words = ft_split(line, " \n");
 		j = -1;
 		while (*(words + (++j)) != NULL)
-		{
-			if (!ft_isdigit(*(*(words + j))))
-				return (ft_free_line_and_words(line, words, -1));
 			*(*(map->map + i) + j) = ft_atoi(*(words + j));
-		}
-		ft_free_line_and_words(line, words, 0);
+		ft_free_line_and_words(line, words);
 	}
 	close(fd);
-	return (0);
+	return ;
 }
 
-int	ft_parse(t_map *map, char *filename)
+void	ft_parse(t_map *map, char *filename)
 {
 	int	i;
 
-	if (ft_width_height_check(map, filename) < 0)
-		return (-1);
+	ft_width_height_check(map, filename);
 	map->map = (int **) malloc(sizeof (int *) * map->height);
 	if (!map->map)
-		return (-1);
+		exit (4);
 	i = -1;
 	while (++i < map->height)
 	{
 		*(map->map + i) = (int *) malloc(sizeof(int) * map->width);
 		if (!*(map->map + i))
-			return (-1);
+			exit (4);
 	}
-	if (ft_read_line(map, filename) < 0)
-		return (-1);
-	return (0);
+	ft_read_line(map, filename);
+	return ;
 }
