@@ -57,11 +57,21 @@ typedef struct s_argb
 	char	b;
 }	t_argb;
 
+typedef struct s_data
+{
+	int		x;
+	int		y;
+	int		z;
+	double	view_x;
+	double	view_y;
+	double	view_z;
+}	t_data;
+
 typedef struct s_map
 {
-	int	width;
-	int	height;
-	int	**map;
+	int		width;
+	int		height;
+	t_data	**map;
 }	t_map;
 
 void	ft_parse(t_map *map, char *filename);

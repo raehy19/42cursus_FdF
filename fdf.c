@@ -63,8 +63,8 @@ int	main(int argc, char **argv)
 	{
 		for (int j = 0; j < map.width; ++j)
 		{
-			ft_draw_dot(img, (t_xy){20 + j * 10, 20 + i * 10}, (t_argb){0, 255, 255, 255});
-			printf("%d\t", map.map[i][j]);
+//			ft_draw_dot(img, (t_xy){20 + j * 10, 20 + i * 10}, (t_argb){0, 255, 255, 255});
+//			printf("%d\t", map.map[i][j]);
 		}
 		printf("\n");
 	}

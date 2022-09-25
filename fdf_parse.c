@@ -87,10 +87,31 @@ void	ft_read_line(t_map *map, char *filename)
 		words = ft_split(line, " \n");
 		j = -1;
 		while (*(words + (++j)) != NULL)
-			*(*(map->map + i) + j) = ft_atoi(*(words + j));
+			(*(*(map->map + i) + j)).z = ft_atoi(*(words + j));
 		ft_free_line_and_words(line, words);
 	}
 	close(fd);
+	return ;
+}
+
+void	ft_init_map(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < map->height)
+	{
+		j = -1;
+		while (++j < map->width)
+		{
+			(*(*(map->map + i) + j)).x = j;
+			(*(*(map->map + i) + j)).y = i;
+			(*(*(map->map + i) + j)).view_x = j;
+			(*(*(map->map + i) + j)).view_y = i;
+			(*(*(map->map + i) + j)).view_z = (*(*(map->map + i) + j)).z;
+		}
+	}
 	return ;
 }
 
