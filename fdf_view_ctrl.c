@@ -24,16 +24,16 @@ void	ft_init_map(t_map *map)
 		j = -1;
 		while (++j < map->width)
 		{
-			(*(*(map->map + i) + j)).x = j;
-			(*(*(map->map + i) + j)).y = i;
-			(*(*(map->map + i) + j)).vx = j;
-			(*(*(map->map + i) + j)).vy = i;
+			(*(*(map->map + i) + j)).x = j - (map->width / 2);
+			(*(*(map->map + i) + j)).y = i - (map->height / 2);
+			(*(*(map->map + i) + j)).vx = (*(*(map->map + i) + j)).x;
+			(*(*(map->map + i) + j)).vy = (*(*(map->map + i) + j)).y;
 			(*(*(map->map + i) + j)).vz = (*(*(map->map + i) + j)).z;
 		}
 	}
 }
 
-void	ft_reset_view(t_map *map)
+void	ft_rotate_reset(t_map *map)
 {
 	int	i;
 	int	j;
@@ -44,8 +44,8 @@ void	ft_reset_view(t_map *map)
 		j = -1;
 		while (++j < map->width)
 		{
-			(*(*(map->map + i) + j)).vx = j;
-			(*(*(map->map + i) + j)).vy = i;
+			(*(*(map->map + i) + j)).vx = (*(*(map->map + i) + j)).x;
+			(*(*(map->map + i) + j)).vy = (*(*(map->map + i) + j)).y;
 			(*(*(map->map + i) + j)).vz = (*(*(map->map + i) + j)).z;
 		}
 	}

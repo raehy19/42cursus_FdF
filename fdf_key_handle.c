@@ -31,25 +31,27 @@
 
 void	ft_reset(t_param *param)
 {
-	if (param)
-		return;
+	ft_rotate_reset(param->map);
+	ft_image_reset(param->img, param->mlx);
+	ft_draw_map(param);
 }
 
 void	ft_rotate_handler(int keycode, t_param *param)
 {
 	if (keycode == KEY_A)
-		ft_rotate_roll(param->map, M_PI / 6);
+		ft_rotate_roll(param->map, M_PI / 12);
 	else if (keycode == KEY_D)
-		ft_rotate_roll(param->map, -M_PI / 6);
+		ft_rotate_roll(param->map, -M_PI / 12);
 	else if (keycode == KEY_W)
-		ft_rotate_pitch(param->map, M_PI / 6);
+		ft_rotate_pitch(param->map, M_PI / 12);
 	else if (keycode == KEY_S)
-		ft_rotate_pitch(param->map, -M_PI / 6);
+		ft_rotate_pitch(param->map, -M_PI / 12);
 	else if (keycode == KEY_Q)
-		ft_rotate_yaw(param->map, M_PI / 6);
+		ft_rotate_yaw(param->map, M_PI / 12);
 	else if (keycode == KEY_E)
-		ft_rotate_yaw(param->map, -M_PI / 6);
-
+		ft_rotate_yaw(param->map, -M_PI / 12);
+	ft_image_reset(param->img, param->mlx);
+	ft_draw_map(param);
 }
 
 void	ft_move_handler(int keycode, void *param)

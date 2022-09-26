@@ -24,12 +24,13 @@ CFLAGS := -Wall -Wextra -Werror -Imlx -g
 RM := rm -f
 
 FDF_SRCS := \
-	fdf.h \
 	fdf.c \
 	fdf_parse.c \
 	fdf_view_ctrl.c \
 	fdf_img_ctrl.c \
+	fdf_draw.c \
 	fdf_key_handle.c \
+#	fdf.h \
 
 FDF_SRCS_BONUS := \
 

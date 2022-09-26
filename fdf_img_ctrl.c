@@ -18,3 +18,14 @@ void	ft_image_init(t_img *img, t_mlx *mlx)
 	img->img_addr = mlx_get_data_addr(img->img_ptr,
 			&img->bits_per_pixel, &img->size_line, &img->endian);
 }
+
+void	ft_image_reset(t_img *img, t_mlx *mlx)
+{
+	mlx_destroy_image(mlx->mlx_ptr, img->img_ptr);
+	ft_image_init(img, mlx);
+}
+
+void	ft_put_image(t_img *img, t_mlx *mlx)
+{
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
+}

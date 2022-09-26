@@ -22,8 +22,8 @@
 # include "printf.h"
 # include "./libft/libft.h"
 
-# define VW 1200
-# define VH 900
+# define VW 2200
+# define VH 1900
 
 typedef struct s_mlx
 {
@@ -81,13 +81,19 @@ typedef struct s_param
 void	ft_parse(t_map *map, char *filename);
 void	ft_init_map(t_map *map);
 
-int ft_key_handler(int keycode, void *param);
+int		ft_key_handler(int keycode, void *param);
 
+void	ft_draw_dot(t_img *img, t_xy dot, t_argb color);
+void	ft_draw_map(t_param *param);
+
+void	ft_rotate_reset(t_map *map);
 void	ft_rotate_roll(t_map *map, double angle);
 void	ft_rotate_pitch(t_map *map, double angle);
 void	ft_rotate_yaw(t_map *map, double angle);
 
 
+void	ft_image_reset(t_img *img, t_mlx *mlx);
 void	ft_image_init(t_img *img, t_mlx *mlx);
+void	ft_put_image(t_img *img, t_mlx *mlx);
 
 #endif
