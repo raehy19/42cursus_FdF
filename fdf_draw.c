@@ -39,17 +39,18 @@ void	ft_draw_map(t_param *param)
 	int		j;
 	t_argb	color;
 
-	color = (t_argb) {0, 255, 255, 255};
+	color = (t_argb){0, 255, 255, 255};
 	i = -1;
 	while (++i < param->map->height)
 	{
 		j = -1;
 		while (++j < param->map->width)
-		{
-			ft_draw_dot(param->img, (t_xy){round(VW/2 + 15 * (*(param->map->map + i) + j)->vx), round(VH/2 - 15 * (*(param->map->map + i) + j)->vz)}, color);
-//			printf("%f\t%f\t%f\t\n", param->map->map[i][j].vx, param->map->map[i][j].vy, param->map->map[i][j].vz);
-		}
+			ft_draw_dot(param->img,
+				(t_xy){round(VW / 2
+					+ param->map->scale * (*(param->map->map + i) + j)->vx),
+				round(VH / 2
+					- param->map->scale * (*(param->map->map + i) + j)->vz)},
+				color);
 	}
 	ft_put_image(param->img, param->mlx);
-	printf("img loaded !\n");
 }

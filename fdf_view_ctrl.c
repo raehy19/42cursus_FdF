@@ -13,6 +13,26 @@
 #include "fdf.h"
 #include <math.h>
 
+void	ft_cal_scale(t_map *map)
+{
+	int	i;
+	int	j;
+	int	max_z;
+
+	max_z = 0;
+	i = -1;
+	while (++i < map->height)
+	{
+		j = -1;
+		while (++j < map->width)
+		{
+			if (max_z < abs((*(*(map->map + i) + j)).z))
+				max_z = abs((*(*(map->map + i) + j)).z);
+		}
+	}
+	map->scale = (double)(VW + VH) / (double)(map->width + map->height + 3 * max_z);
+}
+
 void	ft_init_map(t_map *map)
 {
 	int	i;
@@ -31,6 +51,7 @@ void	ft_init_map(t_map *map)
 			(*(*(map->map + i) + j)).vz = (*(*(map->map + i) + j)).z;
 		}
 	}
+	ft_cal_scale(map);
 }
 
 void	ft_rotate_reset(t_map *map)
