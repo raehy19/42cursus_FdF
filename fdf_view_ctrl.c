@@ -134,3 +134,9 @@ void	ft_rotate_yaw(t_map *map, double angle)
 		}
 	}
 }
+
+void	ft_rotate_isometric(t_map *map)
+{
+	ft_rotate_roll(map, M_PI_4);
+	ft_rotate_pitch(map, M_PI_4);
+}

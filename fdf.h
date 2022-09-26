@@ -91,6 +91,7 @@ void	ft_rotate_reset(t_map *map);
 void	ft_rotate_roll(t_map *map, double angle);
 void	ft_rotate_pitch(t_map *map, double angle);
 void	ft_rotate_yaw(t_map *map, double angle);
+void	ft_rotate_isometric(t_map *map);
 
 
 void	ft_image_reset(t_img *img, t_mlx *mlx);
