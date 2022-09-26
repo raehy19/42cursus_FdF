@@ -29,9 +29,15 @@
 #define KEY_DOWN 125
 #define KEY_UP 126
 
-void	ft_reset(t_param *param)
+#define KEY_PLUS 27
+#define KEY_MINUS 24
+
+void	ft_scale_handler(int keycode, t_param *param)
 {
-	ft_rotate_reset(param->map);
+	if (keycode == KEY_PLUS)
+		param->map->scale *= 0.8;
+	else if (keycode == KEY_MINUS)
+		param->map->scale *= 1.2;
 	ft_image_reset(param->img, param->mlx);
 	ft_draw_map(param);
 }
@@ -62,6 +68,13 @@ void	ft_move_handler(int keycode, void *param)
 		return;
 }
 
+void	ft_reset(t_param *param)
+{
+	ft_rotate_reset(param->map);
+	ft_image_reset(param->img, param->mlx);
+	ft_draw_map(param);
+}
+
 int ft_key_handler(int keycode, void *param)
 {
 	if (keycode == KEY_ESC)
@@ -72,7 +85,9 @@ int ft_key_handler(int keycode, void *param)
 	else if (keycode == KEY_LEFT || keycode == KEY_RIGHT
 		|| keycode == KEY_DOWN || keycode == KEY_UP)
 		ft_move_handler(keycode, param);
+	else if (keycode == KEY_PLUS || keycode == KEY_MINUS)
+		ft_scale_handler(keycode, param);
 	else if (keycode == KEYCODE_R)
 		ft_reset(param);
 	return (0);
-};
+}
