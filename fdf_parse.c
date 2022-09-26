@@ -18,11 +18,14 @@ void	ft_free_line_and_words(char *line, char **words)
 
 	if (line)
 		free(line);
-	i = -1;
 	if (words)
 	{
+		i = -1;
 		while (*(words + (++i)))
+		{
 			free(*(words + i));
+			*(words + i) = NULL;
+		}
 		free(words);
 	}
 }
@@ -36,8 +39,11 @@ int	ft_count_word_in_line(char *line)
 	if (!words)
 		exit (4);
 	i = -1;
-	while (*(words + (++i)) != NULL)
+	while (*(words + (++i)))
+	{
 		free(*(words + i));
+		*(words + i) = NULL;
+	}
 	return (i);
 }
 
@@ -63,7 +69,6 @@ void	ft_width_height_check(t_map *map, char *filename)
 		++i;
 	}
 	map->height = i;
-	close(fd);
 	close(fd);
 }
 
@@ -91,38 +96,18 @@ void	ft_read_line(t_map *map, char *filename)
 	close(fd);
 }
 
-void	ft_init_map(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < map->height)
-	{
-		j = -1;
-		while (++j < map->width)
-		{
-			(*(*(map->map + i) + j)).x = j;
-			(*(*(map->map + i) + j)).y = i;
-			(*(*(map->map + i) + j)).view_x = j;
-			(*(*(map->map + i) + j)).view_y = i;
-			(*(*(map->map + i) + j)).view_z = (*(*(map->map + i) + j)).z;
-		}
-	}
-}
-
 void	ft_parse(t_map *map, char *filename)
 {
 	int	i;
 
 	ft_width_height_check(map, filename);
-	map->map = (int **) malloc(sizeof (int *) * map->height);
+	map->map = (t_data **) malloc(sizeof (t_data *) * map->height);
 	if (!map->map)
 		exit (4);
 	i = -1;
 	while (++i < map->height)
 	{
-		*(map->map + i) = (int *) malloc(sizeof(int) * map->width);
+		*(map->map + i) = (t_data *) malloc(sizeof(t_data) * map->width);
 		if (!*(map->map + i))
 			exit (4);
 	}

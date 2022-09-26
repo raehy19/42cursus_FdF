@@ -22,11 +22,6 @@
 # include "printf.h"
 # include "./libft/libft.h"
 
-# define KEY_PRESS 2
-# define BTN_PRESS 4
-
-# define KEYCODE_ESC 53
-# define KEYCODE_C 8
 
 typedef struct s_mlx
 {
@@ -62,9 +57,9 @@ typedef struct s_data
 	int		x;
 	int		y;
 	int		z;
-	double	view_x;
-	double	view_y;
-	double	view_z;
+	double	vx;
+	double	vy;
+	double	vz;
 }	t_data;
 
 typedef struct s_map
@@ -74,6 +69,17 @@ typedef struct s_map
 	t_data	**map;
 }	t_map;
 
+typedef struct s_param
+{
+	t_mlx	*mlx;
+	t_img	*img;
+	t_map	*map;
+}	t_param;
+
 void	ft_parse(t_map *map, char *filename);
+void	ft_init_map(t_map *map);
+
+int ft_key_handler(int keycode, void *param);
+
 
 #endif

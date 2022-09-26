@@ -12,15 +12,6 @@
 
 #include "fdf.h"
 
-int ft_key_press_handler(int keycode, void *param)
-{
-	if (keycode == KEYCODE_ESC)
-		exit(0);
-	else if (keycode == KEYCODE_C)
-		mlx_clear_window(((t_mlx *)param)->mlx_ptr, ((t_mlx *)param)->win_ptr);
-	return (0);
-};
-
 void	ft_draw_dot(t_img img, t_xy dot, t_argb color)
 {
 	if (img.endian == 0)
@@ -39,10 +30,6 @@ void	ft_draw_dot(t_img img, t_xy dot, t_argb color)
 	}
 }
 
-void	ft_trans(t_map *map, double angle)
-{
-
-}
 
 int	main(int argc, char **argv)
 {
@@ -78,7 +65,7 @@ int	main(int argc, char **argv)
 
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, img.img_ptr, 0, 0);
 
-	mlx_hook(mlx.win_ptr, KEY_PRESS, 0, &ft_key_press_handler, &mlx);
+	mlx_key_hook(mlx.win_ptr, &ft_key_handler, &(t_param) {&mlx, &img, &map});
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }

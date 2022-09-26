@@ -25,7 +25,9 @@ RM := rm -f
 
 FDF_SRCS := \
 	fdf.c \
-	fdf_parse.c
+	fdf_parse.c \
+	fdf_view_ctrl.c \
+	fdf_key_handle.c \
 
 FDF_SRCS_BONUS := \
 
