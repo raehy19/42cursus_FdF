@@ -12,6 +12,7 @@
 
 #include "fdf.h"
 
+
 void	ft_draw_dot(t_img img, t_xy dot, t_argb color)
 {
 	if (img.endian == 0)
@@ -44,9 +45,8 @@ int	main(int argc, char **argv)
 	printf("width height : %d %d\n",map.width, map.height);
 
 	mlx.mlx_ptr = mlx_init();
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1920, 1080, "FdF");
-	img.img_ptr = mlx_new_image(mlx.mlx_ptr, 1920, 1080);
-	img.img_addr = mlx_get_data_addr(img.img_ptr, &img.bits_per_pixel, &img.size_line, &img.endian);
+	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, VW, VH, "FdF");
+	ft_image_init(&img, &mlx);
 
 	printf("print map : \n");
 	for (int i = 0; i < map.height; ++i)

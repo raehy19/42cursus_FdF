@@ -22,6 +22,8 @@
 # include "printf.h"
 # include "./libft/libft.h"
 
+# define VW 1200
+# define VH 900
 
 typedef struct s_mlx
 {
@@ -81,5 +83,11 @@ void	ft_init_map(t_map *map);
 
 int ft_key_handler(int keycode, void *param);
 
+void	ft_rotate_roll(t_map *map, double angle);
+void	ft_rotate_pitch(t_map *map, double angle);
+void	ft_rotate_yaw(t_map *map, double angle);
+
+
+void	ft_image_init(t_img *img, t_mlx *mlx);
 
 #endif

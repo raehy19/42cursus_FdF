@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "math.h"
 
 #define KEY_ESC 53
-#define KEY_C 8
 
 #define KEY_A 0
 #define KEY_S 1
@@ -29,13 +29,48 @@
 #define KEY_DOWN 125
 #define KEY_UP 126
 
+void	ft_reset(t_param *param)
+{
+	if (param)
+		return;
+}
+
+void	ft_rotate_handler(int keycode, t_param *param)
+{
+	if (keycode == KEY_A)
+		ft_rotate_roll(param->map, M_PI / 6);
+	else if (keycode == KEY_D)
+		ft_rotate_roll(param->map, -M_PI / 6);
+	else if (keycode == KEY_W)
+		ft_rotate_pitch(param->map, M_PI / 6);
+	else if (keycode == KEY_S)
+		ft_rotate_pitch(param->map, -M_PI / 6);
+	else if (keycode == KEY_Q)
+		ft_rotate_yaw(param->map, M_PI / 6);
+	else if (keycode == KEY_E)
+		ft_rotate_yaw(param->map, -M_PI / 6);
+
+}
+
+void	ft_move_handler(int keycode, void *param)
+{
+	if (keycode)
+		return;
+	if (param)
+		return;
+}
 
 int ft_key_handler(int keycode, void *param)
 {
 	if (keycode == KEY_ESC)
 		exit (0);
-	else if (keycode == KEY_C)
-		mlx_clear_window(((t_mlx *)param)->mlx_ptr, ((t_mlx *)param)->win_ptr);
-
+	else if (keycode == KEY_A || keycode == KEY_S || keycode == KEY_D
+		|| keycode == KEY_Q || keycode == KEY_W || keycode == KEY_E)
+		ft_rotate_handler(keycode, param);
+	else if (keycode == KEY_LEFT || keycode == KEY_RIGHT
+		|| keycode == KEY_DOWN || keycode == KEY_UP)
+		ft_move_handler(keycode, param);
+	else if (keycode == KEYCODE_R)
+		ft_reset(param);
 	return (0);
 };
