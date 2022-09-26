@@ -25,7 +25,6 @@ void	ft_free_line_and_words(char *line, char **words)
 			free(*(words + i));
 		free(words);
 	}
-	return ;
 }
 
 int	ft_count_word_in_line(char *line)
@@ -66,7 +65,6 @@ void	ft_width_height_check(t_map *map, char *filename)
 	map->height = i;
 	close(fd);
 	close(fd);
-	return ;
 }
 
 void	ft_read_line(t_map *map, char *filename)
@@ -91,7 +89,6 @@ void	ft_read_line(t_map *map, char *filename)
 		ft_free_line_and_words(line, words);
 	}
 	close(fd);
-	return ;
 }
 
 void	ft_init_map(t_map *map)
@@ -112,7 +109,6 @@ void	ft_init_map(t_map *map)
 			(*(*(map->map + i) + j)).view_z = (*(*(map->map + i) + j)).z;
 		}
 	}
-	return ;
 }
 
 void	ft_parse(t_map *map, char *filename)
@@ -131,5 +127,5 @@ void	ft_parse(t_map *map, char *filename)
 			exit (4);
 	}
 	ft_read_line(map, filename);
-	return ;
+	ft_init_map(map);
 }

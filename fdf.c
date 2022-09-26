@@ -39,6 +39,10 @@ void	ft_draw_dot(t_img img, t_xy dot, t_argb color)
 	}
 }
 
+void	ft_trans(t_map *map, double angle)
+{
+
+}
 
 int	main(int argc, char **argv)
 {
@@ -56,7 +60,6 @@ int	main(int argc, char **argv)
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1920, 1080, "FdF");
 	img.img_ptr = mlx_new_image(mlx.mlx_ptr, 1920, 1080);
 	img.img_addr = mlx_get_data_addr(img.img_ptr, &img.bits_per_pixel, &img.size_line, &img.endian);
-
 
 	printf("print map : \n");
 	for (int i = 0; i < map.height; ++i)
