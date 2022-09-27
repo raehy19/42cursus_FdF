@@ -33,6 +33,11 @@ void	ft_draw_dot(t_img *img, t_xy dot, t_argb color)
 	}
 }
 
+void	ft_draw_line()
+{
+
+}
+
 void	ft_draw_map(t_param *param)
 {
 	int		i;
