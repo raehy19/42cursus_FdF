@@ -34,8 +34,10 @@ void	ft_rotate_reset(t_map *map)
 
 void	ft_rotate_roll(t_map *map, double angle)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	double	tmp_x;
+	double	tmp_y;
 
 	i = -1;
 	while (++i < map->height)
@@ -43,22 +45,22 @@ void	ft_rotate_roll(t_map *map, double angle)
 		j = -1;
 		while (++j < map->width)
 		{
+			tmp_x = (*(*(map->map + i) + j)).vx;
+			tmp_y = (*(*(map->map + i) + j)).vy;
 			(*(*(map->map + i) + j)).vx
-				= ((*(*(map->map + i) + j)).vx) * cos(angle)
-				- ((*(*(map->map + i) + j)).vy) * sin(angle);
+					= tmp_x * cos(angle) - tmp_y * sin(angle);
 			(*(*(map->map + i) + j)).vy
-			A= ((*(*(map->map + i) + j)).vy) * cos(angle)
-				+ ((*(*(map->map + i) + j)).vx) * sin(angle);
-			printf("%f %f %f\t", (*(*(map->map + i) + j)).vx, (*(*(map->map + i) + j)).vy, (*(*(map->map + i) + j)).vy);
+					= tmp_y * cos(angle) + tmp_x * sin(angle);
 		}
-		printf("\n");
 	}
 }
 
 void	ft_rotate_pitch(t_map *map, double angle)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	double	tmp_y;
+	double	tmp_z;
 
 	i = -1;
 	while (++i < map->height)
@@ -66,20 +68,22 @@ void	ft_rotate_pitch(t_map *map, double angle)
 		j = -1;
 		while (++j < map->width)
 		{
+			tmp_y = (*(*(map->map + i) + j)).vy;
+			tmp_z = (*(*(map->map + i) + j)).vz;
 			(*(*(map->map + i) + j)).vy
-					= ((((*(*(map->map + i) + j)).vy) * (cos(angle)))
-					- (((*(*(map->map + i) + j)).vz) * (sin(angle))));
+					= tmp_y * cos(angle) - tmp_z * sin(angle);
 			(*(*(map->map + i) + j)).vz
-					= ((((*(*(map->map + i) + j)).vz) * (cos(angle)))
-					+ (((*(*(map->map + i) + j)).vy) * (sin(angle))));
+					= tmp_z * cos(angle) + tmp_y * sin(angle);
 		}
 	}
 }
 
 void	ft_rotate_yaw(t_map *map, double angle)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	double	tmp_x;
+	double	tmp_z;
 
 	i = -1;
 	while (++i < map->height)
@@ -87,23 +91,21 @@ void	ft_rotate_yaw(t_map *map, double angle)
 		j = -1;
 		while (++j < map->width)
 		{
+			tmp_x = (*(*(map->map + i) + j)).vx;
+			tmp_z = (*(*(map->map + i) + j)).vz;
 			(*(*(map->map + i) + j)).vx
-					= ((*(*(map->map + i) + j)).vx) * cos(angle)
-					- ((*(*(map->map + i) + j)).vz) * sin(angle);
+					= tmp_x * cos(angle) - tmp_z * sin(angle);
 			(*(*(map->map + i) + j)).vz
-					= ((*(*(map->map + i) + j)).vz) * cos(angle)
-					+ ((*(*(map->map + i) + j)).vx) * sin(angle);
+					= tmp_z * cos(angle) + tmp_x * sin(angle);
 		}
 	}
 }
 
 void	ft_rotate_isometric(t_map *map)
 {
-//	ft_rotate_pitch(map, M_PI / 2);
-//	ft_rotate_roll(map, 0);
-//	ft_rotate_roll(map, -M_PI_4);
-//	ft_rotate_roll(map, M_PI / 4);
-//	ft_rotate_pitch(map, atan(1 / sqrt(2)));
+//	ft_rotate_pitch(map, M_PI_2);
+	ft_rotate_roll(map, M_PI_4);
+	ft_rotate_pitch(map, atan(1 / sqrt(2)));
 	printf("%p",map);
 	printf("%f\n", atan(1 / sqrt(2)));
 	printf("%f\n", 35.264 * M_PI / 180);

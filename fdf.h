@@ -23,7 +23,7 @@
 # include "./libft/libft.h"
 
 # define VW 1500
-# define VH 1500
+# define VH 1000
 
 typedef struct s_mlx
 {
