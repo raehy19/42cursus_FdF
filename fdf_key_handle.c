@@ -62,12 +62,16 @@ void	ft_rotate_handler(int keycode, t_param *param)
 	ft_draw_map(param);
 }
 
-void	ft_move_handler(int keycode, void *param)
+void	ft_move_handler(int keycode, t_param *param)
 {
-	if (keycode)
-		return;
-	if (param)
-		return;
+	if (keycode == KEY_RIGHT)
+		ft_rotate_pitch(param->map, ROTATE_ANGLE);
+	else if (keycode == KEY_LEFT)
+		ft_rotate_pitch(param->map, -ROTATE_ANGLE);
+	else if (keycode == KEY_DOWN)
+		ft_rotate_roll(param->map, -ROTATE_ANGLE);
+	else if (keycode == KEY_UP)
+		ft_rotate_roll(param->map, ROTATE_ANGLE);
 }
 
 void	ft_reset(t_param *param)

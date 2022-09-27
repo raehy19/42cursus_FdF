@@ -22,8 +22,8 @@
 # include "printf.h"
 # include "./libft/libft.h"
 
-# define VW 900
-# define VH 600
+# define VW 1500
+# define VH 1500
 
 typedef struct s_mlx
 {

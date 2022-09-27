@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "math.h"
+
 
 int	main(int argc, char **argv)
 {
@@ -18,6 +20,7 @@ int	main(int argc, char **argv)
 	t_img	img;
 	t_map	map;
 
+	printf("round test : %f %f %f\n", round(0.8), round(0.4), round(0.555));
 	if (argc != 2)
 		return (1);
 	ft_parse(&map, *(argv + 1));
