@@ -10,4 +10,60 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fdf.h"
 
+void	ft_move_right(t_map *map)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < map->height)
+	{
+		j = -1;
+		while (++j < map->width)
+			(*(*(map->map + i) + j)).vx += map->scale * 10;
+	}
+}
+
+void	ft_move_left(t_map *map)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < map->height)
+	{
+		j = -1;
+		while (++j < map->width)
+			(*(*(map->map + i) + j)).vx -= map->scale * 10;
+	}
+}
+
+void	ft_move_down(t_map *map)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < map->height)
+	{
+		j = -1;
+		while (++j < map->width)
+			(*(*(map->map + i) + j)).vz += map->scale * 10;
+	}
+}
+
+void	ft_move_up(t_map *map)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < map->height)
+	{
+		j = -1;
+		while (++j < map->width)
+			(*(*(map->map + i) + j)).vz -= map->scale * 10;
+	}
+}

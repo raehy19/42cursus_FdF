@@ -32,7 +32,7 @@
 #define KEY_PLUS 27
 #define KEY_MINUS 24
 
-#define ROTATE_ANGLE M_PI / 24
+#define ROTATE_ANGLE M_PI / 36
 
 void	ft_scale_handler(int keycode, t_param *param)
 {
@@ -47,17 +47,17 @@ void	ft_scale_handler(int keycode, t_param *param)
 void	ft_rotate_handler(int keycode, t_param *param)
 {
 	if (keycode == KEY_A)
-		ft_rotate_roll(param->map, ROTATE_ANGLE);
-	else if (keycode == KEY_D)
 		ft_rotate_roll(param->map, -ROTATE_ANGLE);
+	else if (keycode == KEY_D)
+		ft_rotate_roll(param->map, ROTATE_ANGLE);
 	else if (keycode == KEY_W)
 		ft_rotate_pitch(param->map, ROTATE_ANGLE);
 	else if (keycode == KEY_S)
 		ft_rotate_pitch(param->map, -ROTATE_ANGLE);
 	else if (keycode == KEY_Q)
-		ft_rotate_yaw(param->map, ROTATE_ANGLE);
-	else if (keycode == KEY_E)
 		ft_rotate_yaw(param->map, -ROTATE_ANGLE);
+	else if (keycode == KEY_E)
+		ft_rotate_yaw(param->map, ROTATE_ANGLE);
 	ft_image_reset(param->img, param->mlx);
 	ft_draw_map(param);
 }
@@ -65,13 +65,15 @@ void	ft_rotate_handler(int keycode, t_param *param)
 void	ft_move_handler(int keycode, t_param *param)
 {
 	if (keycode == KEY_RIGHT)
-		ft_rotate_pitch(param->map, ROTATE_ANGLE);
+		ft_move_right(param->map);
 	else if (keycode == KEY_LEFT)
-		ft_rotate_pitch(param->map, -ROTATE_ANGLE);
+		ft_move_left(param->map);
 	else if (keycode == KEY_DOWN)
-		ft_rotate_roll(param->map, -ROTATE_ANGLE);
+		ft_move_down(param->map);
 	else if (keycode == KEY_UP)
-		ft_rotate_roll(param->map, ROTATE_ANGLE);
+		ft_move_up(param->map);
+	ft_image_reset(param->img, param->mlx);
+	ft_draw_map(param);
 }
 
 void	ft_reset(t_param *param)

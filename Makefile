@@ -29,6 +29,7 @@ FDF_SRCS := \
 	fdf_img_ctrl.c \
 	fdf_map_ctrl.c \
 	fdf_rotate.c \
+	fdf_move.c \
 	fdf_draw.c \
 	fdf_key_handle.c \
 
