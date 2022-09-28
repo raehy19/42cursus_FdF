@@ -103,10 +103,7 @@ void	ft_rotate_yaw(t_map *map, double angle)
 
 void	ft_rotate_isometric(t_map *map)
 {
-//	ft_rotate_pitch(map, M_PI_2);
-	ft_rotate_roll(map, M_PI_4);
-	ft_rotate_pitch(map, atan(1 / sqrt(2)));
-	printf("%p",map);
-	printf("%f\n", atan(1 / sqrt(2)));
-	printf("%f\n", 35.264 * M_PI / 180);
+	ft_rotate_pitch(map, M_PI);
+	ft_rotate_roll(map, -M_PI_4);
+	ft_rotate_pitch(map, -atan(1 / sqrt(2)));
 }

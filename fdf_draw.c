@@ -54,7 +54,7 @@ void	ft_draw_map(t_param *param)
 				(t_xy){round(VW / 2
 					+ param->map->scale * (*(param->map->map + i) + j)->vx),
 				round(VH / 2
-					- param->map->scale * (*(param->map->map + i) + j)->vz)},
+					+ param->map->scale * (*(param->map->map + i) + j)->vz)},
 				color);
 	}
 	ft_put_image(param->img, param->mlx);
