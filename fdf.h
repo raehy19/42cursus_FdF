@@ -69,6 +69,7 @@ typedef struct s_map
 	int		width;
 	int		height;
 	double	scale;
+	double	initial_scale;
 	t_data	**map;
 }	t_map;
 
@@ -80,14 +81,16 @@ typedef struct s_param
 }	t_param;
 
 void	ft_parse(t_map *map, char *filename);
+
 void	ft_init_map(t_map *map);
+void	ft_cal_scale(t_map *map);
 
 int		ft_key_handler(int keycode, void *param);
 
 void	ft_draw_dot(t_img *img, t_xy dot, t_argb color);
 void	ft_draw_map(t_param *param);
 
-void	ft_rotate_reset(t_map *map);
+void	ft_coordinate_reset(t_map *map);
 void	ft_rotate_roll(t_map *map, double angle);
 void	ft_rotate_pitch(t_map *map, double angle);
 void	ft_rotate_yaw(t_map *map, double angle);

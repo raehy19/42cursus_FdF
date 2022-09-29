@@ -13,7 +13,7 @@
 #include "fdf.h"
 #include <math.h>
 
-void	ft_rotate_reset(t_map *map)
+void	ft_coordinate_reset(t_map *map)
 {
 	int	i;
 	int	j;

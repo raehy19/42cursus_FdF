@@ -39,7 +39,7 @@ void	ft_scale_handler(int keycode, t_param *param)
 	if (keycode == KEY_PLUS)
 		param->map->scale *= 0.8;
 	else if (keycode == KEY_MINUS)
-		param->map->scale *= 1.2;
+		param->map->scale *= 1.25;
 	ft_image_reset(param->img, param->mlx);
 	ft_draw_map(param);
 }
@@ -78,7 +78,8 @@ void	ft_move_handler(int keycode, t_param *param)
 
 void	ft_reset(t_param *param)
 {
-	ft_rotate_reset(param->map);
+	ft_coordinate_reset(param->map);
+	param->map->scale = param->map->initial_scale;
 	ft_image_reset(param->img, param->mlx);
 	ft_draw_map(param);
 }

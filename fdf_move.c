@@ -12,6 +12,8 @@
 
 #include "fdf.h"
 
+#define MOVE_VALUE 20
+
 void	ft_move_right(t_map *map)
 {
 	int i;
@@ -22,7 +24,7 @@ void	ft_move_right(t_map *map)
 	{
 		j = -1;
 		while (++j < map->width)
-			(*(*(map->map + i) + j)).vx += map->scale * 10;
+			(*(*(map->map + i) + j)).vx += MOVE_VALUE / map->scale;
 	}
 }
 
@@ -36,7 +38,7 @@ void	ft_move_left(t_map *map)
 	{
 		j = -1;
 		while (++j < map->width)
-			(*(*(map->map + i) + j)).vx -= map->scale * 10;
+			(*(*(map->map + i) + j)).vx -= MOVE_VALUE / map->scale;
 	}
 }
 
@@ -50,7 +52,7 @@ void	ft_move_down(t_map *map)
 	{
 		j = -1;
 		while (++j < map->width)
-			(*(*(map->map + i) + j)).vz += map->scale * 10;
+			(*(*(map->map + i) + j)).vz += MOVE_VALUE / map->scale;
 	}
 }
 
@@ -64,6 +66,6 @@ void	ft_move_up(t_map *map)
 	{
 		j = -1;
 		while (++j < map->width)
-			(*(*(map->map + i) + j)).vz -= map->scale * 10;
+			(*(*(map->map + i) + j)).vz -= MOVE_VALUE / map->scale;
 	}
 }

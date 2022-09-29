@@ -13,24 +13,37 @@
 #include "fdf.h"
 #include <math.h>
 
+double	ft_min(double a, double b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
 void	ft_cal_scale(t_map *map)
 {
 	int		i;
 	int		j;
-	double	max_z;
+	double	max_h;
+	double	max_w;
 
-	max_z = 0;
+	max_h = 0;
+	max_w = 0;
 	i = -1;
 	while (++i < map->height)
 	{
 		j = -1;
 		while (++j < map->width)
 		{
-			if (max_z < fabs((*(*(map->map + i) + j)).vz))
-				max_z = fabs((*(*(map->map + i) + j)).vz);
+			if (max_h < fabs((*(*(map->map + i) + j)).vz))
+				max_h = fabs((*(*(map->map + i) + j)).vz);
+			if (max_w < fabs((*(*(map->map + i) + j)).vx))
+				max_w = fabs((*(*(map->map + i) + j)).vx);
 		}
 	}
-	map->scale = (VW + VH) / (map->width + map->height + 3 * max_z);
+	printf("%f %f", max_h, max_w);
+	map->initial_scale = 0.96 * ft_min((VH / max_h / 2), (VW / max_w / 2));
+	map->scale = map->initial_scale;
 }
 
 void	ft_init_map(t_map *map)
@@ -51,5 +64,5 @@ void	ft_init_map(t_map *map)
 			(*(*(map->map + i) + j)).vz = (*(*(map->map + i) + j)).z;
 		}
 	}
-	ft_cal_scale(map);
+	map->initial_scale = map->scale;
 }

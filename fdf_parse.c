@@ -112,5 +112,4 @@ void	ft_parse(t_map *map, char *filename)
 			exit (4);
 	}
 	ft_read_line(map, filename);
-	ft_init_map(map);
 }
