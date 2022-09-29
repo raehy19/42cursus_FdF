@@ -29,17 +29,19 @@
 #define KEY_DOWN 125
 #define KEY_UP 126
 
-#define KEY_PLUS 27
-#define KEY_MINUS 24
+#define KEY_PLUS 24
+#define KEY_MINUS 27
 
-#define ROTATE_ANGLE M_PI / 36
+#define ROTATE_VALUE M_PI/36
+#define ZOOM_IN_VALUE 1.25
+#define ZOOM_OUT_VALUE 0.8
 
 void	ft_scale_handler(int keycode, t_param *param)
 {
 	if (keycode == KEY_PLUS)
-		param->map->scale *= 0.8;
+		param->map->scale *= ZOOM_IN_VALUE;
 	else if (keycode == KEY_MINUS)
-		param->map->scale *= 1.25;
+		param->map->scale *= ZOOM_OUT_VALUE;
 	ft_image_reset(param->img, param->mlx);
 	ft_draw_map(param);
 }
@@ -47,17 +49,17 @@ void	ft_scale_handler(int keycode, t_param *param)
 void	ft_rotate_handler(int keycode, t_param *param)
 {
 	if (keycode == KEY_A)
-		ft_rotate_roll(param->map, -ROTATE_ANGLE);
+		ft_rotate_roll(param->map, -ROTATE_VALUE);
 	else if (keycode == KEY_D)
-		ft_rotate_roll(param->map, ROTATE_ANGLE);
+		ft_rotate_roll(param->map, ROTATE_VALUE);
 	else if (keycode == KEY_W)
-		ft_rotate_pitch(param->map, ROTATE_ANGLE);
+		ft_rotate_pitch(param->map, ROTATE_VALUE);
 	else if (keycode == KEY_S)
-		ft_rotate_pitch(param->map, -ROTATE_ANGLE);
+		ft_rotate_pitch(param->map, -ROTATE_VALUE);
 	else if (keycode == KEY_Q)
-		ft_rotate_yaw(param->map, -ROTATE_ANGLE);
+		ft_rotate_yaw(param->map, -ROTATE_VALUE);
 	else if (keycode == KEY_E)
-		ft_rotate_yaw(param->map, ROTATE_ANGLE);
+		ft_rotate_yaw(param->map, ROTATE_VALUE);
 	ft_image_reset(param->img, param->mlx);
 	ft_draw_map(param);
 }
@@ -79,7 +81,7 @@ void	ft_move_handler(int keycode, t_param *param)
 void	ft_reset(t_param *param)
 {
 	ft_coordinate_reset(param->map);
-	param->map->scale = param->map->initial_scale;
+	param->map->scale = param->map->init_scale;
 	ft_image_reset(param->img, param->mlx);
 	ft_draw_map(param);
 }

@@ -20,10 +20,10 @@ void	ft_move_right(t_map *map)
 	int j;
 
 	i = -1;
-	while (++i < map->height)
+	while (++i < map->col)
 	{
 		j = -1;
-		while (++j < map->width)
+		while (++j < map->row)
 			(*(*(map->map + i) + j)).vx += MOVE_VALUE / map->scale;
 	}
 }
@@ -34,10 +34,10 @@ void	ft_move_left(t_map *map)
 	int j;
 
 	i = -1;
-	while (++i < map->height)
+	while (++i < map->col)
 	{
 		j = -1;
-		while (++j < map->width)
+		while (++j < map->row)
 			(*(*(map->map + i) + j)).vx -= MOVE_VALUE / map->scale;
 	}
 }
@@ -48,10 +48,10 @@ void	ft_move_down(t_map *map)
 	int j;
 
 	i = -1;
-	while (++i < map->height)
+	while (++i < map->col)
 	{
 		j = -1;
-		while (++j < map->width)
+		while (++j < map->row)
 			(*(*(map->map + i) + j)).vz += MOVE_VALUE / map->scale;
 	}
 }
@@ -62,10 +62,10 @@ void	ft_move_up(t_map *map)
 	int j;
 
 	i = -1;
-	while (++i < map->height)
+	while (++i < map->col)
 	{
 		j = -1;
-		while (++j < map->width)
+		while (++j < map->row)
 			(*(*(map->map + i) + j)).vz -= MOVE_VALUE / map->scale;
 	}
 }

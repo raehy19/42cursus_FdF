@@ -19,10 +19,10 @@ void	ft_coordinate_reset(t_map *map)
 	int	j;
 
 	i = -1;
-	while (++i < map->height)
+	while (++i < map->col)
 	{
 		j = -1;
-		while (++j < map->width)
+		while (++j < map->row)
 		{
 			(*(*(map->map + i) + j)).vx = (*(*(map->map + i) + j)).x;
 			(*(*(map->map + i) + j)).vy = (*(*(map->map + i) + j)).y;
@@ -40,10 +40,10 @@ void	ft_rotate_roll(t_map *map, double angle)
 	double	tmp_y;
 
 	i = -1;
-	while (++i < map->height)
+	while (++i < map->col)
 	{
 		j = -1;
-		while (++j < map->width)
+		while (++j < map->row)
 		{
 			tmp_x = (*(*(map->map + i) + j)).vx;
 			tmp_y = (*(*(map->map + i) + j)).vy;
@@ -63,10 +63,10 @@ void	ft_rotate_pitch(t_map *map, double angle)
 	double	tmp_z;
 
 	i = -1;
-	while (++i < map->height)
+	while (++i < map->col)
 	{
 		j = -1;
-		while (++j < map->width)
+		while (++j < map->row)
 		{
 			tmp_y = (*(*(map->map + i) + j)).vy;
 			tmp_z = (*(*(map->map + i) + j)).vz;
@@ -86,10 +86,10 @@ void	ft_rotate_yaw(t_map *map, double angle)
 	double	tmp_z;
 
 	i = -1;
-	while (++i < map->height)
+	while (++i < map->col)
 	{
 		j = -1;
-		while (++j < map->width)
+		while (++j < map->row)
 		{
 			tmp_x = (*(*(map->map + i) + j)).vx;
 			tmp_z = (*(*(map->map + i) + j)).vz;

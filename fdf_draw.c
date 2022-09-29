@@ -46,10 +46,10 @@ void	ft_draw_map(t_param *param)
 
 	color = (t_argb){0, 255, 255, 255};
 	i = -1;
-	while (++i < param->map->height)
+	while (++i < param->map->col)
 	{
 		j = -1;
-		while (++j < param->map->width)
+		while (++j < param->map->row)
 			ft_draw_dot(param->img,
 				(t_xy){round(VW / 2
 					+ param->map->scale * (*(param->map->map + i) + j)->vx),

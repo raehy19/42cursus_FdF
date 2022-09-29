@@ -57,18 +57,18 @@ void	ft_width_height_check(t_map *map, char *filename)
 	if (fd < 0)
 		exit (2);
 	line = get_next_line(fd);
-	map->width = ft_count_word_in_line(line);
+	map->row = ft_count_word_in_line(line);
 	line = get_next_line(fd);
 	i = 1;
 	while (line)
 	{
-		if (ft_count_word_in_line(line) != map->width)
+		if (ft_count_word_in_line(line) != map->row)
 			exit (5);
 		free(line);
 		line = get_next_line(fd);
 		++i;
 	}
-	map->height = i;
+	map->col = i;
 	close(fd);
 }
 
@@ -84,7 +84,7 @@ void	ft_read_line(t_map *map, char *filename)
 	if (fd < 0)
 		exit (2);
 	i = -1;
-	while (++i < map->height)
+	while (++i < map->col)
 	{
 		line = get_next_line(fd);
 		words = ft_split(line, " \n");
@@ -101,13 +101,13 @@ void	ft_parse(t_map *map, char *filename)
 	int	i;
 
 	ft_width_height_check(map, filename);
-	map->map = (t_data **) malloc(sizeof (t_data *) * map->height);
+	map->map = (t_data **) malloc(sizeof (t_data *) * map->col);
 	if (!map->map)
 		exit (4);
 	i = -1;
-	while (++i < map->height)
+	while (++i < map->col)
 	{
-		*(map->map + i) = (t_data *) malloc(sizeof(t_data) * map->width);
+		*(map->map + i) = (t_data *) malloc(sizeof(t_data) * map->row);
 		if (!*(map->map + i))
 			exit (4);
 	}
