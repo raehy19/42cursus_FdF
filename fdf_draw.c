@@ -38,13 +38,26 @@ void	ft_draw_line()
 
 }
 
+t_argb	ft_cal_color(int z)
+{
+	if (z < -255 || z > 255)
+		return ((t_argb) {0, 0, 0, 0});
+	if (z < -127)
+		return ((t_argb) {0, 0, 255 - 2 * ((-z) - 128), 255});
+	else if (z < 0)
+		return ((t_argb) {0, 255 - 2 * (-z), 255, 255});
+	else if (z < 128)
+		return ((t_argb) {0, 255, 255, 255 - 2 * z});
+	else
+		return ((t_argb) {0, 255, 255 - 2 * (z - 128), 0});
+}
+
+
 void	ft_draw_map(t_param *param)
 {
 	int		i;
 	int		j;
-	t_argb	color;
 
-	color = (t_argb){0, 255, 255, 255};
 	i = -1;
 	while (++i < param->map->col)
 	{
@@ -55,7 +68,7 @@ void	ft_draw_map(t_param *param)
 					+ param->map->scale * (*(param->map->map + i) + j)->vx),
 				round(VH / 2
 					+ param->map->scale * (*(param->map->map + i) + j)->vz)},
-				color);
+			ft_cal_color((*(param->map->map + i) + j)->z * 255 / param->map->max_z));
 	}
 	ft_put_image(param->img, param->mlx);
 }

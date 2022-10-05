@@ -48,10 +48,10 @@ typedef struct s_xy
 
 typedef struct s_argb
 {
-	char	a;
-	char	r;
-	char	g;
-	char	b;
+	unsigned char	a;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 }	t_argb;
 
 typedef struct s_data
