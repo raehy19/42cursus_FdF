@@ -6,7 +6,7 @@
 /*   By: rjeong <rjeong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 09:18:07 by rjeong            #+#    #+#             */
-/*   Updated: 2022/09/27 11:51:47 by rjeong           ###   ########.fr       */
+/*   Updated: 2022/10/06 21:42:46 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	ft_rotate_roll(t_map *map, double angle)
 			tmp_x = (*(*(map->map + i) + j)).vx;
 			tmp_y = (*(*(map->map + i) + j)).vy;
 			(*(*(map->map + i) + j)).vx
-					= tmp_x * cos(angle) - tmp_y * sin(angle);
+				= tmp_x * cos(angle) - tmp_y * sin(angle);
 			(*(*(map->map + i) + j)).vy
-					= tmp_y * cos(angle) + tmp_x * sin(angle);
+				= tmp_y * cos(angle) + tmp_x * sin(angle);
 		}
 	}
 }
@@ -71,9 +71,9 @@ void	ft_rotate_pitch(t_map *map, double angle)
 			tmp_y = (*(*(map->map + i) + j)).vy;
 			tmp_z = (*(*(map->map + i) + j)).vz;
 			(*(*(map->map + i) + j)).vy
-					= tmp_y * cos(angle) - tmp_z * sin(angle);
+				= tmp_y * cos(angle) - tmp_z * sin(angle);
 			(*(*(map->map + i) + j)).vz
-					= tmp_z * cos(angle) + tmp_y * sin(angle);
+				= tmp_z * cos(angle) + tmp_y * sin(angle);
 		}
 	}
 }
@@ -94,9 +94,9 @@ void	ft_rotate_yaw(t_map *map, double angle)
 			tmp_x = (*(*(map->map + i) + j)).vx;
 			tmp_z = (*(*(map->map + i) + j)).vz;
 			(*(*(map->map + i) + j)).vx
-					= tmp_x * cos(angle) - tmp_z * sin(angle);
+				= tmp_x * cos(angle) - tmp_z * sin(angle);
 			(*(*(map->map + i) + j)).vz
-					= tmp_z * cos(angle) + tmp_x * sin(angle);
+				= tmp_z * cos(angle) + tmp_x * sin(angle);
 		}
 	}
 }

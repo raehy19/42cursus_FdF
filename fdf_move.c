@@ -6,7 +6,7 @@
 /*   By: rjeong <rjeong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:50:54 by rjeong            #+#    #+#             */
-/*   Updated: 2022/09/27 11:50:57 by rjeong           ###   ########.fr       */
+/*   Updated: 2022/10/06 21:42:32 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 void	ft_move_right(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < map->col)
@@ -30,8 +30,8 @@ void	ft_move_right(t_map *map)
 
 void	ft_move_left(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < map->col)
@@ -44,8 +44,8 @@ void	ft_move_left(t_map *map)
 
 void	ft_move_down(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < map->col)
@@ -58,8 +58,8 @@ void	ft_move_down(t_map *map)
 
 void	ft_move_up(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < map->col)

@@ -27,10 +27,11 @@ FDF_SRCS := \
 	fdf.c \
 	fdf_parse.c \
 	fdf_img_ctrl.c \
-	fdf_map_ctrl.c \
+	fdf_map_init.c \
 	fdf_rotate.c \
 	fdf_move.c \
 	fdf_draw.c \
+	fdf_draw_utils.c \
 	fdf_key_handle.c \
 
 FDF_SRCS_BONUS := \

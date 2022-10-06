@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_map_ctrl.c                                     :+:      :+:    :+:   */
+/*   fdf_map_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjeong <rjeong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:21:15 by rjeong            #+#    #+#             */
-/*   Updated: 2022/09/27 10:21:18 by rjeong           ###   ########.fr       */
+/*   Updated: 2022/10/06 21:42:26 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	ft_cal_scale(t_map *map)
 			max_w = ft_max(max_w, fabs((*(*(map->map + i) + j)).vx));
 		}
 	}
-	printf("%f %f\n", max_h, max_w);
 	map->init_scale = VIEW_SCALE * ft_min((VH / max_h / 2), (VW / max_w / 2));
 	map->scale = map->init_scale;
 }
@@ -69,7 +68,6 @@ void	ft_cal_max_min_z(t_map *map)
 				map->max_z = (*(*(map->map + i) + j)).z;
 		}
 	}
-	printf("%d\n", map->max_z);
 }
 
 void	ft_init_map(t_map *map)

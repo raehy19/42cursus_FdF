@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_key_handle.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 2rjeong <rjeong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rjeong <rjeong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:04:25 by rjeong            #+#    #+#             */
-/*   Updated: 2022/09/26 10:04:27 by rjeong           ###   ########.fr       */
+/*   Updated: 2022/10/06 21:42:19 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 #define KEY_PLUS 24
 #define KEY_MINUS 27
 
-#define ROTATE_VALUE M_PI/36
+#define ROTATE_VALUE_RECIPROCAL 36
 #define ZOOM_IN_VALUE 1.25
 #define ZOOM_OUT_VALUE 0.8
 
@@ -50,17 +50,17 @@ void	ft_scale_handler(int keycode, t_param *param)
 void	ft_rotate_handler(int keycode, t_param *param)
 {
 	if (keycode == KEY_A)
-		ft_rotate_roll(param->map, -ROTATE_VALUE);
+		ft_rotate_roll(param->map, -(M_PI / ROTATE_VALUE_RECIPROCAL));
 	else if (keycode == KEY_D)
-		ft_rotate_roll(param->map, ROTATE_VALUE);
+		ft_rotate_roll(param->map, (M_PI / ROTATE_VALUE_RECIPROCAL));
 	else if (keycode == KEY_W)
-		ft_rotate_pitch(param->map, ROTATE_VALUE);
+		ft_rotate_pitch(param->map, (M_PI / ROTATE_VALUE_RECIPROCAL));
 	else if (keycode == KEY_S)
-		ft_rotate_pitch(param->map, -ROTATE_VALUE);
+		ft_rotate_pitch(param->map, -(M_PI / ROTATE_VALUE_RECIPROCAL));
 	else if (keycode == KEY_Q)
-		ft_rotate_yaw(param->map, -ROTATE_VALUE);
+		ft_rotate_yaw(param->map, -(M_PI / ROTATE_VALUE_RECIPROCAL));
 	else if (keycode == KEY_E)
-		ft_rotate_yaw(param->map, ROTATE_VALUE);
+		ft_rotate_yaw(param->map, (M_PI / ROTATE_VALUE_RECIPROCAL));
 	ft_image_reset(param->img, param->mlx);
 	ft_draw_map(param, 0);
 }
@@ -89,10 +89,13 @@ void	ft_reset_change(int keycode, t_param *param)
 		ft_draw_map(param, 0);
 	}
 	else if (keycode == KEYCODE_C)
+	{
+		ft_image_reset(param->img, param->mlx);
 		ft_draw_map(param, 1);
+	}
 }
 
-int ft_key_handler(int keycode, void *param)
+int	ft_key_handler(int keycode, void *param)
 {
 	if (keycode == KEY_ESC)
 		exit (0);

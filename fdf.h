@@ -6,7 +6,7 @@
 /*   By: rjeong <rjeong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:36:46 by rjeong            #+#    #+#             */
-/*   Updated: 2022/09/21 17:36:48 by rjeong           ###   ########.fr       */
+/*   Updated: 2022/10/06 21:43:17 by rjeong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# include "printf.h"
 # include "./libft/libft.h"
 
 # define VW 2000
@@ -96,6 +95,11 @@ void	ft_cal_scale(t_map *map);
 int		ft_key_handler(int keycode, void *param);
 
 void	ft_draw_map(t_param *param, int change_type);
+
+void	ft_draw_dot(t_img *img, t_xy dot, t_argb color);
+void	ft_draw_line_high(t_xyz *st, t_xyz *en, t_img *img, int max_z);
+void	ft_draw_line_low(t_xyz *st, t_xyz *en, t_img *img, int max_z);
+t_argb	ft_cal_color(double z, int max_z);
 
 void	ft_coordinate_reset(t_map *map);
 void	ft_rotate_roll(t_map *map, double angle);
