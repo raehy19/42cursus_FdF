@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, VW, VH, "FdF");
 	ft_image_init(&img, &mlx);
 	ft_init_map(&map);
-	ft_draw_map(&(t_param){&mlx, &img, &map});
+	ft_draw_map(&(t_param){&mlx, &img, &map}, 0);
 	printf("row col scale : %d %d %f\n", map.row, map.col, map.scale);
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, img.img_ptr, 0, 0);
 	mlx_key_hook(mlx.win_ptr, &ft_key_handler, &(t_param){&mlx, &img, &map});

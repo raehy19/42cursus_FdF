@@ -34,9 +34,9 @@ typedef struct s_mlx
 typedef struct s_img
 {
 	void	*img_ptr;
-	char	*img_addr;
+	char	*img_adr;
 	int		bits_per_pixel;
-	int		size_line;
+	int		width;
 	int		endian;
 }	t_img;
 
@@ -45,6 +45,13 @@ typedef struct s_xy
 	int	x;
 	int	y;
 }	t_xy;
+
+typedef struct s_xyz
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_xyz;
 
 typedef struct s_argb
 {
@@ -89,8 +96,8 @@ void	ft_cal_scale(t_map *map);
 
 int		ft_key_handler(int keycode, void *param);
 
-void	ft_draw_dot(t_img *img, t_xy dot, t_argb color);
-void	ft_draw_map(t_param *param);
+void	ft_draw_dot(t_img *img, t_xy *dot, t_argb *color);
+void	ft_draw_map(t_param *param, int change_type);
 
 void	ft_coordinate_reset(t_map *map);
 void	ft_rotate_roll(t_map *map, double angle);

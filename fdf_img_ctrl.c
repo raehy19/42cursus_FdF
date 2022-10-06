@@ -15,8 +15,8 @@
 void	ft_image_init(t_img *img, t_mlx *mlx)
 {
 	img->img_ptr = mlx_new_image(mlx->mlx_ptr, VW, VH);
-	img->img_addr = mlx_get_data_addr(img->img_ptr,
-			&img->bits_per_pixel, &img->size_line, &img->endian);
+	img->img_adr = mlx_get_data_addr(img->img_ptr,
+		&img->bits_per_pixel, &img->width, &img->endian);
 }
 
 void	ft_image_reset(t_img *img, t_mlx *mlx)

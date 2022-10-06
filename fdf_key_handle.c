@@ -23,6 +23,7 @@
 #define KEY_E 14
 
 #define KEYCODE_R 15
+#define KEYCODE_C 8
 
 #define KEY_LEFT 123
 #define KEY_RIGHT 124
@@ -43,7 +44,7 @@ void	ft_scale_handler(int keycode, t_param *param)
 	else if (keycode == KEY_MINUS)
 		param->map->scale *= ZOOM_OUT_VALUE;
 	ft_image_reset(param->img, param->mlx);
-	ft_draw_map(param);
+	ft_draw_map(param, 0);
 }
 
 void	ft_rotate_handler(int keycode, t_param *param)
@@ -61,7 +62,7 @@ void	ft_rotate_handler(int keycode, t_param *param)
 	else if (keycode == KEY_E)
 		ft_rotate_yaw(param->map, ROTATE_VALUE);
 	ft_image_reset(param->img, param->mlx);
-	ft_draw_map(param);
+	ft_draw_map(param, 0);
 }
 
 void	ft_move_handler(int keycode, t_param *param)
@@ -75,15 +76,20 @@ void	ft_move_handler(int keycode, t_param *param)
 	else if (keycode == KEY_UP)
 		ft_move_up(param->map);
 	ft_image_reset(param->img, param->mlx);
-	ft_draw_map(param);
+	ft_draw_map(param, 0);
 }
 
-void	ft_reset(t_param *param)
+void	ft_reset_change(int keycode, t_param *param)
 {
-	ft_coordinate_reset(param->map);
-	param->map->scale = param->map->init_scale;
-	ft_image_reset(param->img, param->mlx);
-	ft_draw_map(param);
+	if (keycode == KEYCODE_R)
+	{
+		ft_coordinate_reset(param->map);
+		param->map->scale = param->map->init_scale;
+		ft_image_reset(param->img, param->mlx);
+		ft_draw_map(param, 0);
+	}
+	else if (keycode == KEYCODE_C)
+		ft_draw_map(param, 1);
 }
 
 int ft_key_handler(int keycode, void *param)
@@ -98,7 +104,7 @@ int ft_key_handler(int keycode, void *param)
 		ft_move_handler(keycode, param);
 	else if (keycode == KEY_PLUS || keycode == KEY_MINUS)
 		ft_scale_handler(keycode, param);
-	else if (keycode == KEYCODE_R)
-		ft_reset(param);
+	else if (keycode == KEYCODE_R || keycode == KEYCODE_C)
+		ft_reset_change(keycode, param);
 	return (0);
 }

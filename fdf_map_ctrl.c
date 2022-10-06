@@ -13,7 +13,7 @@
 #include "fdf.h"
 #include <math.h>
 
-#define SCALE_INIT 0.96
+#define VIEW_SCALE 0.96
 
 double	ft_max(double a, double b)
 {
@@ -49,7 +49,7 @@ void	ft_cal_scale(t_map *map)
 		}
 	}
 	printf("%f %f\n", max_h, max_w);
-	map->init_scale = SCALE_INIT * ft_min((VH / max_h / 2), (VW / max_w / 2));
+	map->init_scale = VIEW_SCALE * ft_min((VH / max_h / 2), (VW / max_w / 2));
 	map->scale = map->init_scale;
 }
 
@@ -59,15 +59,14 @@ void	ft_cal_max_min_z(t_map *map)
 	int	j;
 
 	i = -1;
+	map->max_z = 0;
 	while (++i < map->col)
 	{
 		j = -1;
 		while (++j < map->row)
 		{
-			if ((*(*(map->map + i) + j)).z > map->max_z)
+			if (abs((*(*(map->map + i) + j)).z) > map->max_z)
 				map->max_z = (*(*(map->map + i) + j)).z;
-			if ((*(*(map->map + i) + j)).z < map->min_z)
-				map->min_z = (*(*(map->map + i) + j)).z;
 		}
 	}
 	printf("%d %d\n", map->max_z, map->min_z);
