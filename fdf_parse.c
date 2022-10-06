@@ -44,6 +44,7 @@ int	ft_count_word_in_line(char *line)
 		free(*(words + i));
 		*(words + i) = NULL;
 	}
+	free(words);
 	return (i);
 }
 
@@ -58,6 +59,7 @@ void	ft_width_height_check(t_map *map, char *filename)
 		exit (2);
 	line = get_next_line(fd);
 	map->row = ft_count_word_in_line(line);
+	free(line);
 	line = get_next_line(fd);
 	i = 1;
 	while (line)

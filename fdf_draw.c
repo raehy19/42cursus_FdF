@@ -13,39 +13,39 @@
 #include "fdf.h"
 #include "math.h"
 
-t_argb	*ft_cal_color(int z, int max_z)
+t_argb	ft_cal_color(double z, int max_z)
 {
 	if (max_z)
 		z = z * 255 / max_z;
 	if (z < -255 || z > 255)
-		return (&(t_argb) {0, 0, 0, 0});
+		return ((t_argb) {0, 0, 0, 0});
 	if (z < -127)
-		return (&(t_argb) {0, 0, 255 - 2 * ((-z) - 128), 255});
+		return ((t_argb) {0, 255, 255 - 2 * ((-z) - 128), 0});
 	else if (z < 0)
-		return (&(t_argb) {0, 255 - 2 * (-z), 255, 255});
+		return ((t_argb) {0, 255, 255, 255 - 2 * (-z)});
 	else if (z < 128)
-		return (&(t_argb) {0, 255, 255, 255 - 2 * z});
+		return ((t_argb) {0, 255 - 2 * (z), 255, 255});
 	else
-		return (&(t_argb) {0, 255, 255 - 2 * (z - 128), 0});
+		return ((t_argb) {0, 0, 255 - 2 * ((z) - 128), 255});
 }
 
-void	ft_draw_dot(t_img *img, t_xy *dot, t_argb *color)
+void	ft_draw_dot(t_img *img, t_xy dot, t_argb color)
 {
-	if (dot->x < 0 || dot->x >= VW || dot->y < 0 || dot->y >= VH)
+	if (dot.x < 0 || dot.x >= VW || dot.y < 0 || dot.y >= VH)
 		return ;
 	if (img->endian == 0)
 	{
-		*(img->img_adr + (img->width * dot->y) + (4 * dot->x) + 0) = color->b;
-		*(img->img_adr + (img->width * dot->y) + (4 * dot->x) + 1) = color->g;
-		*(img->img_adr + (img->width * dot->y) + (4 * dot->x) + 2) = color->r;
-		*(img->img_adr + (img->width * dot->y) + (4 * dot->x) + 3) = color->a;
+		*(img->img_adr + (img->width * dot.y) + (4 * dot.x) + 0) = color.b;
+		*(img->img_adr + (img->width * dot.y) + (4 * dot.x) + 1) = color.g;
+		*(img->img_adr + (img->width * dot.y) + (4 * dot.x) + 2) = color.r;
+		*(img->img_adr + (img->width * dot.y) + (4 * dot.x) + 3) = color.a;
 	}
 	else if (img->endian == 1)
 	{
-		*(img->img_adr + (img->width * dot->y) + (4 * dot->x) + 0) = color->a;
-		*(img->img_adr + (img->width * dot->y) + (4 * dot->x) + 1) = color->r;
-		*(img->img_adr + (img->width * dot->y) + (4 * dot->x) + 2) = color->g;
-		*(img->img_adr + (img->width * dot->y) + (4 * dot->x) + 3) = color->b;
+		*(img->img_adr + (img->width * dot.y) + (4 * dot.x) + 0) = color.a;
+		*(img->img_adr + (img->width * dot.y) + (4 * dot.x) + 1) = color.r;
+		*(img->img_adr + (img->width * dot.y) + (4 * dot.x) + 2) = color.g;
+		*(img->img_adr + (img->width * dot.y) + (4 * dot.x) + 3) = color.b;
 	}
 }
 
@@ -85,11 +85,12 @@ void	ft_draw_line_high(t_xyz *st, t_xyz *en, t_img *img, int max_z)
 			st->x += increment_xy->x;
 			discriminant += (2 * w - 2 * h);
 		}
-		ft_draw_dot(img, &(t_xy){st->x, st->y},
-					ft_cal_color(round(st->z + i * (en->z - st->z) / (double)w),
-								 max_z));
+		ft_draw_dot(img, (t_xy){st->x, st->y},
+			ft_cal_color((st->z + (i * (en->z - st->z)) / (double)h),
+				 max_z));
 		st->y += increment_xy->y;
 	}
+	free(increment_xy);
 }
 void	ft_draw_line_low(t_xyz *st, t_xyz *en, t_img *img, int max_z)
 {
@@ -113,21 +114,22 @@ void	ft_draw_line_low(t_xyz *st, t_xyz *en, t_img *img, int max_z)
 			st->y += increment_xy->y;
 			discriminant += (2 * h - 2 * w);
 		}
-		ft_draw_dot(img, &(t_xy){st->x, st->y},
-			ft_cal_color(round(st->z + i * (en->z - st->z) / (double)w),
+		ft_draw_dot(img, (t_xy){st->x, st->y},
+			ft_cal_color((st->z + (i * (en->z - st->z)) / (double)w),
 				 max_z));
 		st->x += increment_xy->x;
 	}
+	free(increment_xy);
 }
 
-void	ft_draw_line(t_xyz *start, t_xyz *end, t_img *img, int max_z)
+void	ft_draw_line(t_xyz *st, t_xyz *en, t_img *img, int max_z)
 {
-	if (abs(start->x - end->x) < abs(start->y - end->y))
-		ft_draw_line_high(start, end, img, max_z);
+	if (abs(st->x - en->x) < abs(st->y - en->y))
+		ft_draw_line_high(st, en, img, max_z);
 	else
-		ft_draw_line_low(start, end, img, max_z);
-	free(start);
-	free(end);
+		ft_draw_line_low(st, en, img, max_z);
+	free(st);
+	free(en);
 }
 
 t_xyz	*ft_xyz(t_data *data, double scale)
@@ -175,7 +177,7 @@ void	ft_draw_dot_map(t_map *map, t_img *img, t_mlx *mlx)
 		j = -1;
 		while (++j < map->row)
 			ft_draw_dot(img,
-				&(t_xy){round(VW / 2
+				(t_xy){round(VW / 2
 					+ map->scale * (*(map->map + i) + j)->vx),
 				round(VH / 2
 					+ map->scale * (*(map->map + i) + j)->vz)},
@@ -200,19 +202,4 @@ void	ft_draw_map(t_param *param, int change_type)
 		ft_draw_line_map(param->map, param->img, param->mlx);
 	else if (draw_type == 1)
 		ft_draw_dot_map(param->map, param->img, param->mlx);
-
-////test
-//	t_xyz	*xyz1;
-//	t_xyz	*xyz2;
-//
-//	xyz1 = malloc(sizeof(t_xyz));
-//	xyz2 = malloc(sizeof(t_xyz));
-//	xyz1->x = 10;
-//	xyz1->y = 10;
-//	xyz1->z = 10;
-//	xyz2->x = 200;
-//	xyz2->y = 200;
-//	xyz2->z = 10;
-//	ft_draw_line(xyz1, xyz2,param->img, 200);
-//	ft_put_image(param->img, param->mlx);
 }

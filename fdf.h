@@ -95,7 +95,6 @@ void	ft_cal_scale(t_map *map);
 
 int		ft_key_handler(int keycode, void *param);
 
-void	ft_draw_dot(t_img *img, t_xy *dot, t_argb *color);
 void	ft_draw_map(t_param *param, int change_type);
 
 void	ft_coordinate_reset(t_map *map);
