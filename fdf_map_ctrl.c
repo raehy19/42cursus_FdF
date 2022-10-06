@@ -69,7 +69,7 @@ void	ft_cal_max_min_z(t_map *map)
 				map->max_z = (*(*(map->map + i) + j)).z;
 		}
 	}
-	printf("%d %d\n", map->max_z, map->min_z);
+	printf("%d\n", map->max_z);
 }
 
 void	ft_init_map(t_map *map)

@@ -15,7 +15,8 @@
 
 t_argb	*ft_cal_color(int z, int max_z)
 {
-	z = z * 255 /max_z;
+	if (max_z)
+		z = z * 255 / max_z;
 	if (z < -255 || z > 255)
 		return (&(t_argb) {0, 0, 0, 0});
 	if (z < -127)
@@ -48,54 +49,96 @@ void	ft_draw_dot(t_img *img, t_xy *dot, t_argb *color)
 	}
 }
 
-t_xy	ft_cal_discriminant(t_xyz start, t_xyz end)
+t_xy	*ft_cal_increment(t_xyz *start, t_xyz *end)
 {
-	int	x;
-	int	y;
+	t_xy	*xy;
 
-	x = 1;
-	y = 1;
-	if (start.x > end.x)
-		x = -1;
-	if (start.y > end.y)
-		y = -1;
-	return ((t_xy){x, y});
+	xy = malloc(sizeof(t_xy));
+	xy->x = 1;
+	xy->y = 1;
+	if (start->x > end->x)
+		xy->x = -1;
+	if (start->y > end->y)
+		xy->y = -1;
+	return (xy);
 }
 
-void	ft_draw_line_low(t_xyz start, t_xyz end, t_img *img, int max_z)
+void	ft_draw_line_high(t_xyz *st, t_xyz *en, t_img *img, int max_z)
 {
-	int		width;
-	int		height;
-	t_xy	increment_xy;
+	int		w;
+	int		h;
+	t_xy	*increment_xy;
 	int		discriminant;
 	int		i;
 
-	width = abs(start.x - end.x);
-	height = abs(start.y - end.y);
-	increment_xy = ft_cal_discriminant(start, end);
-	discriminant = 2 * height - width;
+	w = abs(st->x - en->x);
+	h = abs(st->y - en->y);
+	increment_xy = ft_cal_increment(st, en);
+	discriminant = 2 * w - h;
 	i = -1;
-	while (++i < width)
+	while (++i < h)
 	{
 		if (discriminant < 0)
-			discriminant += 2 * width;
+			discriminant += 2 * w;
 		else
 		{
-			start.y += increment_xy.y;
-			discriminant += 2 * width - 2 * height;
+			st->x += increment_xy->x;
+			discriminant += (2 * w - 2 * h);
 		}
-		ft_draw_dot(img, &(t_xy){start.x, start.y},
-			ft_cal_color(round(start.z + i * (end.z - start.z) / (double)width), max_z));
-		start.x += increment_xy.x;
+		ft_draw_dot(img, &(t_xy){st->x, st->y},
+					ft_cal_color(round(st->z + i * (en->z - st->z) / (double)w),
+								 max_z));
+		st->y += increment_xy->y;
+	}
+}
+void	ft_draw_line_low(t_xyz *st, t_xyz *en, t_img *img, int max_z)
+{
+	int		w;
+	int		h;
+	t_xy	*increment_xy;
+	int		discriminant;
+	int		i;
+
+	w = abs(st->x - en->x);
+	h = abs(st->y - en->y);
+	increment_xy = ft_cal_increment(st, en);
+	discriminant = 2 * h - w;
+	i = -1;
+	while (++i < w)
+	{
+		if (discriminant < 0)
+			discriminant += 2 * h;
+		else
+		{
+			st->y += increment_xy->y;
+			discriminant += (2 * h - 2 * w);
+		}
+		ft_draw_dot(img, &(t_xy){st->x, st->y},
+			ft_cal_color(round(st->z + i * (en->z - st->z) / (double)w),
+				 max_z));
+		st->x += increment_xy->x;
 	}
 }
 
-void	ft_select_line(t_xyz start, t_xyz end, t_img *img, int max_z)
+void	ft_draw_line(t_xyz *start, t_xyz *end, t_img *img, int max_z)
 {
-	if (abs(start.x - end.x) < abs(start.y - end.y))
-		ft_draw_line_low(start, end, img, max_z);
+	if (abs(start->x - end->x) < abs(start->y - end->y))
+		ft_draw_line_high(start, end, img, max_z);
 	else
 		ft_draw_line_low(start, end, img, max_z);
+	free(start);
+	free(end);
+}
+
+t_xyz	*ft_xyz(t_data *data, double scale)
+{
+	t_xyz	*xyz;
+
+	xyz = malloc(sizeof(t_xyz));
+	xyz->x = round(VW / 2 + scale * data->vx);
+	xyz->y = round(VH / 2 + scale * data->vz);
+	xyz->z = data->z;
+	return (xyz);
 }
 
 void	ft_draw_line_map(t_map *map, t_img *img, t_mlx *mlx)
@@ -104,12 +147,18 @@ void	ft_draw_line_map(t_map *map, t_img *img, t_mlx *mlx)
 	int		j;
 
 	i = -1;
-	while (++i + 1 < map->col)
+	while (++i < map->col)
 	{
 		j = -1;
-		while (++j + 1 < map->row)
-//			ft_select_line();
-			;
+		while (++j < map->row)
+		{
+			if (i + 1 < map->col)
+				ft_draw_line(ft_xyz(*(map->map + i) + j, map->scale),
+							 ft_xyz(*(map->map + i + 1) + j, map->scale), img, map->max_z);
+			if (j + 1 < map->row)
+				ft_draw_line(ft_xyz(*(map->map + i) + j, map->scale),
+					ft_xyz(*(map->map + i) + j + 1, map->scale), img, map->max_z);
+		}
 	}
 	ft_put_image(img, mlx);
 }
@@ -139,6 +188,7 @@ void	ft_draw_map(t_param *param, int change_type)
 {
 	static int	draw_type;
 
+	printf("draw map\n");
 	if (change_type)
 	{
 		if (draw_type == 0)
@@ -146,9 +196,23 @@ void	ft_draw_map(t_param *param, int change_type)
 		else if (draw_type == 1)
 			draw_type = 0;
 	}
-	printf("draw type : %d\n", draw_type);
 	if (draw_type == 0)
 		ft_draw_line_map(param->map, param->img, param->mlx);
 	else if (draw_type == 1)
 		ft_draw_dot_map(param->map, param->img, param->mlx);
+
+////test
+//	t_xyz	*xyz1;
+//	t_xyz	*xyz2;
+//
+//	xyz1 = malloc(sizeof(t_xyz));
+//	xyz2 = malloc(sizeof(t_xyz));
+//	xyz1->x = 10;
+//	xyz1->y = 10;
+//	xyz1->z = 10;
+//	xyz2->x = 200;
+//	xyz2->y = 200;
+//	xyz2->z = 10;
+//	ft_draw_line(xyz1, xyz2,param->img, 200);
+//	ft_put_image(param->img, param->mlx);
 }

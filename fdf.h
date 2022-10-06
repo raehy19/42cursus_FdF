@@ -22,8 +22,8 @@
 # include "printf.h"
 # include "./libft/libft.h"
 
-# define VW 1500
-# define VH 1000
+# define VW 2000
+# define VH 1500
 
 typedef struct s_mlx
 {
@@ -78,7 +78,6 @@ typedef struct s_map
 	double	scale;
 	double	init_scale;
 	int		max_z;
-	int		min_z;
 	t_data	**map;
 }	t_map;
 
