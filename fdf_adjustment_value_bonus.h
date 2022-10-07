@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_ADJUSTMENT_VALUE_H
-# define FDF_ADJUSTMENT_VALUE_H
+#ifndef FDF_ADJUSTMENT_VALUE_BONUS_H
+# define FDF_ADJUSTMENT_VALUE_BONUS_H
 
-# define VW 2700
+# define VW 2000
 # define VH 1500
 
 # define ROTATE_VALUE_RECIPROCAL 36

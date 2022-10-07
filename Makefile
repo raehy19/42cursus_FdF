@@ -35,6 +35,15 @@ FDF_SRCS := \
 	fdf_move.c \
 
 FDF_SRCS_BONUS := \
+	fdf_bonus.c \
+	fdf_parse_bonus.c \
+	fdf_img_ctrl_bonus.c \
+	fdf_map_init_bonus.c \
+	fdf_key_handle_bonus.c \
+	fdf_draw_bonus.c \
+	fdf_draw_utils_bonus.c \
+	fdf_rotate_bonus.c \
+	fdf_move_bonus.c \
 
 all : $(NAME)
 
@@ -73,7 +82,9 @@ $(LIBFT) :
 $(NAME) : $(LIBFT) $(MLX_LIB_NAME) $(FDF_OBJS)
 	$(CC) $^ -L$(LIBFT_DIR) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
 
-$(BONUS_NAME) : $(FDF_OBJS_BONUS)
+$(BONUS_NAME) : $(LIBFT) $(MLX_LIB_NAME) $(FDF_OBJS_BONUS)
+	$(CC) $^ -L$(LIBFT_DIR) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@
+	cp $(BONUS_NAME) ./$(NAME)
 
 $(MLX_LIB_NAME) :
 	make -C $(MLX_LIB_DIR) all
