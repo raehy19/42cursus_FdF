@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "fdf_adjustment_value.h"
 
 void	ft_img_init(t_img *img, t_mlx *mlx)
 {

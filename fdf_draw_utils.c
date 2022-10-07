@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "fdf_adjustment_value.h"
 
 t_argb	ft_cal_color(double z, int max_z)
 {

@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-#define MOVE_VALUE 20
+#include "fdf_adjustment_value.h"
 
 void	ft_move_right(t_map *map)
 {

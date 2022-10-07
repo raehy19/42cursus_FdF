@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "math.h"
+#include "fdf_adjustment_value.h"
+#include <math.h>
 
 void	ft_draw_line(t_xyz *st, t_xyz *en, t_img *img, int max_z)
 {

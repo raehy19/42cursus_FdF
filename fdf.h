@@ -20,9 +20,6 @@
 
 # include "./libft/libft.h"
 
-# define VW 2000
-# define VH 1500
-
 typedef struct s_mlx
 {
 	void	*mlx_ptr;

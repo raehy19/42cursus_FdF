@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "fdf_adjustment_value.h"
 #include <math.h>
-
-#define VIEW_SCALE 0.96
 
 double	ft_max(double a, double b)
 {

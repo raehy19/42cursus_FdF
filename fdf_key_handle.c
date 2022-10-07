@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "math.h"
+#include "fdf_adjustment_value.h"
+#include <math.h>
 
 #define KEY_ESC 53
 
@@ -32,10 +33,6 @@
 
 #define KEY_PLUS 24
 #define KEY_MINUS 27
-
-#define ROTATE_VALUE_RECIPROCAL 36
-#define ZOOM_IN_VALUE 1.25
-#define ZOOM_OUT_VALUE 0.8
 
 void	ft_scale_handler(int keycode, t_param *param)
 {

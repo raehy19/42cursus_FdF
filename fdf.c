@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "fdf_adjustment_value.h"
 
 int	main(int argc, char **argv)
 {
