@@ -43,7 +43,7 @@ void	ft_scale_handler(int keycode, t_param *param)
 		param->map->scale *= ZOOM_IN_VALUE;
 	else if (keycode == KEY_MINUS)
 		param->map->scale *= ZOOM_OUT_VALUE;
-	ft_image_reset(param->img, param->mlx);
+	ft_img_reset(param->img, param->mlx);
 	ft_draw_map(param, 0);
 }
 
@@ -61,7 +61,7 @@ void	ft_rotate_handler(int keycode, t_param *param)
 		ft_rotate_yaw(param->map, -(M_PI / ROTATE_VALUE_RECIPROCAL));
 	else if (keycode == KEY_E)
 		ft_rotate_yaw(param->map, (M_PI / ROTATE_VALUE_RECIPROCAL));
-	ft_image_reset(param->img, param->mlx);
+	ft_img_reset(param->img, param->mlx);
 	ft_draw_map(param, 0);
 }
 
@@ -75,7 +75,7 @@ void	ft_move_handler(int keycode, t_param *param)
 		ft_move_down(param->map);
 	else if (keycode == KEY_UP)
 		ft_move_up(param->map);
-	ft_image_reset(param->img, param->mlx);
+	ft_img_reset(param->img, param->mlx);
 	ft_draw_map(param, 0);
 }
 
@@ -85,12 +85,12 @@ void	ft_reset_change(int keycode, t_param *param)
 	{
 		ft_coordinate_reset(param->map);
 		param->map->scale = param->map->init_scale;
-		ft_image_reset(param->img, param->mlx);
+		ft_img_reset(param->img, param->mlx);
 		ft_draw_map(param, 0);
 	}
 	else if (keycode == KEYCODE_C)
 	{
-		ft_image_reset(param->img, param->mlx);
+		ft_img_reset(param->img, param->mlx);
 		ft_draw_map(param, 1);
 	}
 }

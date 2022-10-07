@@ -34,7 +34,7 @@ t_xyz	*ft_xyz(t_data *data, double scale)
 	return (xyz);
 }
 
-void	ft_draw_line_map(t_map *map, t_img *img, t_mlx *mlx)
+void	ft_draw_line_map(t_map *map, t_img *img)
 {
 	int		i;
 	int		j;
@@ -55,10 +55,9 @@ void	ft_draw_line_map(t_map *map, t_img *img, t_mlx *mlx)
 					img, map->max_z);
 		}
 	}
-	ft_put_image(img, mlx);
 }
 
-void	ft_draw_dot_map(t_map *map, t_img *img, t_mlx *mlx)
+void	ft_draw_dot_map(t_map *map, t_img *img)
 {
 	int		i;
 	int		j;
@@ -75,7 +74,6 @@ void	ft_draw_dot_map(t_map *map, t_img *img, t_mlx *mlx)
 					+ map->scale * (*(map->map + i) + j)->vz)},
 				ft_cal_color((*(map->map + i) + j)->z, map->max_z));
 	}
-	ft_put_image(img, mlx);
 }
 
 void	ft_draw_map(t_param *param, int change_type)
@@ -90,7 +88,8 @@ void	ft_draw_map(t_param *param, int change_type)
 			draw_type = 0;
 	}
 	if (draw_type == 0)
-		ft_draw_line_map(param->map, param->img, param->mlx);
+		ft_draw_line_map(param->map, param->img);
 	else if (draw_type == 1)
-		ft_draw_dot_map(param->map, param->img, param->mlx);
+		ft_draw_dot_map(param->map, param->img);
+	ft_put_img(param->img, param->mlx);
 }

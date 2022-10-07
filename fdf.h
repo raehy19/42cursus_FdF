@@ -16,7 +16,6 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <stdlib.h>
 # include <unistd.h>
 
 # include "./libft/libft.h"
@@ -89,8 +88,11 @@ typedef struct s_param
 
 void	ft_parse(t_map *map, char *filename);
 
+void	ft_img_reset(t_img *img, t_mlx *mlx);
+void	ft_img_init(t_img *img, t_mlx *mlx);
+void	ft_put_img(t_img *img, t_mlx *mlx);
+
 void	ft_init_map(t_map *map);
-void	ft_cal_scale(t_map *map);
 
 int		ft_key_handler(int keycode, void *param);
 
@@ -111,9 +113,5 @@ void	ft_move_right(t_map *map);
 void	ft_move_left(t_map *map);
 void	ft_move_down(t_map *map);
 void	ft_move_up(t_map *map);
-
-void	ft_image_reset(t_img *img, t_mlx *mlx);
-void	ft_image_init(t_img *img, t_mlx *mlx);
-void	ft_put_image(t_img *img, t_mlx *mlx);
 
 #endif
