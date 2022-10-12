@@ -20,7 +20,7 @@ MLX_LIB_NAME := libmlx.dylib
 MLX_LIB_DIR := mlx
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -MMD -MP -Imlx -g
+CFLAGS := -Wall -Wextra -Werror -MMD -MP -Imlx
 RM := rm -f
 
 FDF_SRCS := \
