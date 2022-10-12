@@ -47,6 +47,8 @@ FDF_SRCS_BONUS := \
 
 all : $(NAME)
 
+bonus : $(BONUS_NAME)
+
 FDF_OBJS := $(FDF_SRCS:.c=.o)
 
 FDF_OBJS_BONUS := $(FDF_SRCS_BONUS:.c=.o)
@@ -54,8 +56,6 @@ FDF_OBJS_BONUS := $(FDF_SRCS_BONUS:.c=.o)
 FDF_DEPS := $(FDF_SRCS:.c=.d)
 
 FDF_DEPS_BONUS := $(FDF_SRCS_BONUS:.c=.d)
-
--include $(FDF_DEPS) $(FDF_DEPS_BONUS)
 
 clean :
 	make -C $(MLX_LIB_DIR) clean
@@ -74,7 +74,7 @@ fclean : clean
 re : fclean
 	make all
 
-bonus : $(BONUS_NAME)
+-include $(FDF_DEPS) $(FDF_DEPS_BONUS)
 
 $(LIBFT) :
 	make -C $(LIBFT_DIR) all
